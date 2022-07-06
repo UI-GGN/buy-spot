@@ -1,5 +1,6 @@
 import React from 'react'
 import './index.css'
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { BuyerRegistration } from './components/BuyerRegistration'
@@ -66,6 +67,7 @@ function App() {
         </div>
       </div>
     </BrowserRouter>
+  
   )
 }
 

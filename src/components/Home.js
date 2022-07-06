@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import Banner from './Banner';
+import ProductList from './ProductList';
+import Footer from './Footer';
 
 export const Home = () => {
   return (
-    <div>
-      <p>Homepage</p>
+<div>
+      <Banner/>
+      <ProductList/>
+      <Footer/>
     </div>
   )
 }
