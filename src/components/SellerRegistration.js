@@ -25,9 +25,6 @@ export const SellerRegistration = () => {
         <Form.Label>Phone Number</Form.Label>
         <Form.Control type="number" placeholder="Phone Number" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Agree" />
-      </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>
