@@ -55,7 +55,19 @@
   padding: 10px 20px;
 }
 
-.logo-image {
+.navbar{
+  background-color: #2f333a;
+  color:white;
+}
+
+.navbar-brand{
+  font-style: italic;
+  font-weight: 500;
+  color:white;
+  font-size:1.5rem;
+}
+
+.logo-image{
   height: 100px;
   width: 100px;
 }
@@ -78,29 +90,23 @@
   font-size: 30px;
   margin-bottom: 40px;
   font-weight: 700;
-  color: blueviolet;
+  color: black;
   text-align: center;
 }
 
-.product-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  row-gap: 40px;
-}
+
 .product-list {
-  margin-top: 50px;
+  padding-top: 50px;
 }
 
-.product-inner-container {
-  display: flex;
-  justify-content: center;
-  column-gap: 20px;
+
+.product-list{
+  padding-top: 50px;
+  background-color: #e3e3e3;
 }
 
 .footer-container {
-  margin-top: 20%;
-  background-color: black;
+  background-color: #2f333a;
   min-height: 30px;
   text-align: center;
   color: white;
@@ -108,5 +114,19 @@
 }
 
 .card-img-height {
-  height: 400px;
+  height: 350px;
+}
+
+.custom-card{
+  background-color: transparent !important;
+    border: 0px !important;
+    margin-top: 25px !important;
+}
+
+.banner-slider{
+  height: 500px;
+  justify-content: center;
+  width: 100%;
+  display: block;
+  overflow: hidden;
 }

@@ -1,12 +1,13 @@
 import React from 'react';
-import Banner from './Banner';
+import BannerSlider from './Bannerslider';
 import ProductList from './ProductList';
 import Footer from './Footer';
+
 
 export const Home = () => {
   return (
 <div>
-      <Banner/>
+      <BannerSlider/>
       <ProductList/>
       <Footer/>
     </div>
