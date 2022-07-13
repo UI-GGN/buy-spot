@@ -20,7 +20,7 @@ export const BuyerLogin = () => {
   return (
     <div className="register-form">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>Seller Registration</h3>
+        <h3>Buyer Login</h3>
 
         <div className="form-input-email">
           <label>Email address</label>
