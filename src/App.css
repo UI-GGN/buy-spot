@@ -55,19 +55,19 @@
   padding: 10px 20px;
 }
 
-.navbar{
+.navbar {
   background-color: #2f333a;
-  color:white;
+  color: white;
 }
 
-.navbar-brand{
+.navbar-brand {
   font-style: italic;
   font-weight: 500;
-  color:white;
-  font-size:1.5rem;
+  color: white;
+  font-size: 1.5rem;
 }
 
-.logo-image{
+.logo-image {
   height: 100px;
   width: 100px;
 }
@@ -94,13 +94,11 @@
   text-align: center;
 }
 
-
 .product-list {
   padding-top: 50px;
 }
 
-
-.product-list{
+.product-list {
   padding-top: 50px;
   background-color: #e3e3e3;
 }
@@ -117,13 +115,13 @@
   height: 350px;
 }
 
-.custom-card{
+.custom-card {
   background-color: transparent !important;
-    border: 0px !important;
-    margin-top: 25px !important;
+  border: 0px !important;
+  margin-top: 25px !important;
 }
 
-.banner-slider{
+.banner-slider {
   height: 500px;
   justify-content: center;
   width: 100%;

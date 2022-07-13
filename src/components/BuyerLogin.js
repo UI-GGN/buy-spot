@@ -5,14 +5,11 @@ import React from 'react'
 export const BuyerLogin = () => {
   return (
     <div>
-      <h2>Buyer Login</h2>
       <Form>
+        <h3>Buyer Login</h3>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control size="sm" type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
