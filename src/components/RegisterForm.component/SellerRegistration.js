@@ -23,7 +23,7 @@ export const SellerRegistration = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Seller Registration</h3>
 
-        <div className="form-input-email">
+        <div className="form-inputs">
           <label>Email address</label>
           <input
             type="email"
@@ -38,11 +38,13 @@ export const SellerRegistration = () => {
             onKeyUp={() => {
               trigger('email')
             }}
-          />
-          {errors.email && <p>{errors.email.message}</p>}
+          />{' '}
+          <div style={{ height: '30px' }}>
+            {errors.email && <p>{errors.email.message}</p>}
+          </div>
         </div>
 
-        <div className="form-input-set-password">
+        <div className="form-inputs">
           <label>Password</label>
           <input
             type="password"
@@ -57,11 +59,13 @@ export const SellerRegistration = () => {
             onKeyUp={() => {
               trigger('password')
             }}
-          />
-          {errors.password && <p>{errors.password.message}</p>}
+          />{' '}
+          <div style={{ height: '30px' }}>
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
         </div>
 
-        <div className="form-input-confirm-password">
+        <div className="form-inputs">
           <label>Confirm Password</label>
           <input
             type="password"
@@ -81,10 +85,12 @@ export const SellerRegistration = () => {
               trigger('confirmPassword')
             }}
           />
-          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          <div style={{ height: '30px' }}>
+            {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          </div>
         </div>
 
-        <div className="form-input-phone-number">
+        <div className="form-inputs">
           <label>Phone Number</label>
           <input
             type="number"
@@ -99,8 +105,10 @@ export const SellerRegistration = () => {
             onKeyUp={() => {
               trigger('phoneNumber')
             }}
-          />
-          {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
+          />{' '}
+          <div style={{ height: '30px' }}>
+            {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
+          </div>
         </div>
         <button variant="primary" type="submit">
           Submit

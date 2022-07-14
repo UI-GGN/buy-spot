@@ -18,11 +18,11 @@ export const BuyerLogin = () => {
   }
 
   return (
-    <div className="register-form">
+    <div className="login-form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Buyer Login</h3>
 
-        <div className="form-input-email">
+        <div className="form-inputs">
           <label>Email address</label>
           <input
             type="email"
@@ -38,10 +38,12 @@ export const BuyerLogin = () => {
               trigger('email')
             }}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          <div style={{ height: '30px' }}>
+            {errors.email && <p>{errors.email.message}</p>}
+          </div>
         </div>
 
-        <div className="form-input-set-password">
+        <div className="form-inputs">
           <label>Password</label>
           <input
             type="password"
@@ -57,7 +59,9 @@ export const BuyerLogin = () => {
               trigger('password')
             }}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          <div style={{ height: '30px' }}>
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
         </div>
 
         <button variant="primary" type="submit">
