@@ -1,8 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import './Form.css'
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Alert } from 'react-bootstrap';
 
 export const BuyerRegistration = () => {
+  toast.configure()
   const {
     register,
     handleSubmit,
@@ -17,6 +21,10 @@ export const BuyerRegistration = () => {
   const onSubmit = (data) => {
     console.log(data)
   }
+  const notify = ()=>{
+ 
+   alert("Registered Successfully");
+}
 
   return (
     <div className="register-form">
@@ -84,7 +92,7 @@ export const BuyerRegistration = () => {
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
         </div>
 
-        <button variant="primary" type="submit">
+        <button variant="primary" type="submit" onclick={notify}>
           Submit
         </button>
       </form>
