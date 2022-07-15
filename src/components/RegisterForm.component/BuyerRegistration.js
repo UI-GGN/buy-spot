@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import './Form.css'
 
@@ -7,15 +7,17 @@ export const BuyerRegistration = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-    value,
-    pattern,
     trigger,
     getValues,
   } = useForm()
 
+  const [userInfo, setUserInfo] = useState()
+
   const onSubmit = (data) => {
+    setUserInfo(data)
     console.log(data)
+    let buyerData = JSON.stringify(userInfo, undefined, 2)
+    console.log(buyerData)
   }
 
   return (
@@ -87,6 +89,27 @@ export const BuyerRegistration = () => {
           />{' '}
           <div style={{ height: '30px' }}>
             {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          </div>
+        </div>
+
+        <div className="form-inputs">
+          <label>Phone Number</label>
+          <input
+            type="number"
+            placeholder="Phone Number"
+            {...register('phoneNumber', {
+              required: 'Phone Number is Required',
+              minLength: {
+                value: 6,
+                message: 'Phone Number need to be 10 characters',
+              },
+            })}
+            onKeyUp={() => {
+              trigger('phoneNumber')
+            }}
+          />{' '}
+          <div style={{ height: '30px' }}>
+            {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
           </div>
         </div>
 
