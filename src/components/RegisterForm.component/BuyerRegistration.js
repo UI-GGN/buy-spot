@@ -38,10 +38,13 @@ export const BuyerRegistration = () => {
             placeholder="Enter email"
             {...register('email', {
               required: 'Email is Required',
+              inputProps:{ "data-testid": "email" },
+
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: 'Invalid email address',
               },
+              
             })}
             onKeyUp={() => {
               trigger('email')
@@ -55,6 +58,7 @@ export const BuyerRegistration = () => {
           <input
             type="password"
             placeholder="Enter Password"
+            inputProps={ {"data-testid": "email" }}
             {...register('password', {
               required: 'Password is Required',
               minLength: {
