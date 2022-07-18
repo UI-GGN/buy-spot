@@ -51,8 +51,12 @@ export const SellerLogin = () => {
             {...register('password', {
               required: 'Password is Required',
               minLength: {
-                value: 6,
-                message: 'Password need to be 6 characters',
+                value: 8,
+                message: 'Password must be atleast 8 characters',
+              },
+              maxLength: {
+                value: 15,
+                message: 'Password must not exceed 15 characters',
               },
             })}
             onKeyUp={() => {
