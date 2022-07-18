@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import './Form.css'
 
@@ -7,15 +7,17 @@ export const BuyerRegistration = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-    value,
-    pattern,
     trigger,
     getValues,
   } = useForm()
 
+  const [userInfo, setUserInfo] = useState()
+
   const onSubmit = (data) => {
+    setUserInfo(data)
     console.log(data)
+    let buyerData = JSON.stringify(userInfo, undefined, 2)
+    console.log(buyerData)
   }
 
   return (
@@ -52,8 +54,12 @@ export const BuyerRegistration = () => {
             {...register('password', {
               required: 'Password is Required',
               minLength: {
-                value: 6,
-                message: 'Password need to be 6 characters',
+                value: 8,
+                message: 'Password must be atleast 8 characters',
+              },
+              maxLength: {
+                value: 15,
+                message: 'Password must not exceed 15 characters',
               },
             })}
             onKeyUp={() => {
@@ -76,10 +82,6 @@ export const BuyerRegistration = () => {
                 confirmPassword: (value) =>
                   value === getValues().password || 'Passwords do not match!',
               },
-              // minLength: {
-              //   value: 6,
-              //   message: 'Password need to be 6 characters',
-              // },
             })}
             onKeyUp={() => {
               trigger('confirmPassword')
@@ -87,6 +89,31 @@ export const BuyerRegistration = () => {
           />{' '}
           <div style={{ height: '30px' }}>
             {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          </div>
+        </div>
+
+        <div className="form-inputs">
+          <label>Phone Number</label>
+          <input
+            type="number"
+            placeholder="Phone Number"
+            {...register('phoneNumber', {
+              required: 'Phone Number is Required',
+              minLength: {
+                value: 10,
+                message: 'Phone Number must be 10 characters',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Phone Number must be 10 characters',
+              },
+            })}
+            onKeyUp={() => {
+              trigger('phoneNumber')
+            }}
+          />{' '}
+          <div style={{ height: '30px' }}>
+            {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
           </div>
         </div>
 
