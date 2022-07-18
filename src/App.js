@@ -32,7 +32,13 @@ function App() {
             <Navbar.Brand style={{ color: 'white' }} as={Link} to="/">
               BuySpot
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              style={{
+                backgroundColor: 'rgb(255,255,255,0.5)',
+                height: '2.3rem',
+              }}
+            />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto">
                 <Nav.Link style={{ color: 'white' }} as={Link} to="/">
