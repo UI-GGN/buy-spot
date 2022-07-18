@@ -38,7 +38,7 @@ form input {
 }
 
 form button {
-  background-color: rgb(212, 74, 74);
+  background-color: rgb(156, 120, 120);
   color: white;
   padding: 6px 14px;
   font-weight: bold;
@@ -47,8 +47,10 @@ form button {
   margin-top: 10px;
 }
 
-form button:hover {
-  background-color: rgb(163, 60, 60);
+button:disabled,
+button[disabled] {
+  background-color: #cb5656;
+  color: #f1eaea;
 }
 
 body {

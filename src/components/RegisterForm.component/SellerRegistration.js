@@ -6,17 +6,13 @@ export const SellerRegistration = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    value,
-    pattern,
+    formState: { errors, isDirty, isValid },
+
     trigger,
     getValues,
-  } = useForm()
+  } = useForm({ mode: 'onChange' })
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  const onSubmit = (data) => {}
 
   return (
     <div>
@@ -114,7 +110,7 @@ export const SellerRegistration = () => {
             {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
           </div>
         </div>
-        <button variant="primary" type="submit">
+        <button variant="primary" type="submit" disabled={isDirty && isValid}>
           Submit
         </button>
       </form>

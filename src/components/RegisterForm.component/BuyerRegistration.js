@@ -6,24 +6,18 @@ export const BuyerRegistration = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
+
     trigger,
     getValues,
-  } = useForm()
+  } = useForm({ mode: 'onChange' })
 
-  const [userInfo, setUserInfo] = useState()
-
-  const onSubmit = (data) => {
-    setUserInfo(data)
-    console.log(data)
-    let buyerData = JSON.stringify(userInfo, undefined, 2)
-    console.log(buyerData)
-  }
+  const onSubmit = (data) => {}
 
   return (
     <div className="register-form">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>Seller Registration</h3>
+        <h3>Buyer Registration</h3>
 
         <div className="form-inputs">
           <label>Email address</label>
@@ -117,7 +111,7 @@ export const BuyerRegistration = () => {
           </div>
         </div>
 
-        <button variant="primary" type="submit">
+        <button variant="primary" type="submit" disabled={isDirty && isValid}>
           Submit
         </button>
       </form>
