@@ -91,7 +91,7 @@ export const BuyerRegistration = () => {
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
         </div>
 
-        <button variant="primary" type="submit" onClick={notify}>
+        <button variant="primary" type="submit" data-testid="register" onClick={notify}>
           Submit
         </button>
       </form>

@@ -33,8 +33,20 @@ it('should get textbox role in registration form',async () => {
         
 
             {/* Testing using mock  */}
-            {/*
+            it("renders user data", async()=>{
+            const fakeuser={
+                email:'xyz@gmail.com',
+                        password:'Abcd@1234',
+                        confirmpassword:'Abcd@1234'
+            };
+            jest.spyOn(global,"fetch").mockImplementation(()=>
+            
+            Promise.resolve({
+                json:()=>Promise.resolve(fakeuser)
+            }))
+        });
 
+{/*
             describe("basic rendering and functionality", ()=>{
                 it("Should call register service api to create account on register", async () => {
                     const userInfoToBeRegistered={
@@ -75,13 +87,14 @@ it('should get textbox role in registration form',async () => {
                         }
                     });
             
-                    fireEvent.click(getByTestId("registerButton"));
+                    fireEvent.click(getByTestId("register"));
             
                     await expect(returnedPayload).toBeTruthy();
             
                 });
             })
         */}
+        
 
             
 
