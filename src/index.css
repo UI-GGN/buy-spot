@@ -11,35 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App-header {
-  display: block;
-  background: black;
-  font-weight: bold;
-  padding: 1rem;
-}
-.App-header > a {
-  text-decoration: none;
-  color: white;
-}
-
-p {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  text-align: center;
-  font-size: large;
-  color: #fff;
-  background-color: transparent;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 .modal-content {
   position: relative;
   top: 150px;
