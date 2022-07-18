@@ -80,10 +80,6 @@ export const SellerRegistration = () => {
                 confirmPassword: (value) =>
                   value === getValues().password || 'Passwords do not match!',
               },
-              // minLength: {
-              //   value: 6,
-              //   message: 'Password need to be 6 characters',
-              // },
             })}
             onKeyUp={() => {
               trigger('confirmPassword')
@@ -102,8 +98,12 @@ export const SellerRegistration = () => {
             {...register('phoneNumber', {
               required: 'Phone Number is Required',
               minLength: {
-                value: 6,
-                message: 'Phone Number need to be 10 characters',
+                value: 10,
+                message: 'Phone Number must be 10 characters',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Phone Number must be 10 characters',
               },
             })}
             onKeyUp={() => {
