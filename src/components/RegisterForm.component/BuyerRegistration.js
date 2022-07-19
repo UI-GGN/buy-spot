@@ -35,7 +35,7 @@ export const BuyerRegistration = () => {
               trigger('email')
             }}
           />
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.email && <p>{errors.email.message}</p>}
           </div>
         </div>
@@ -47,6 +47,11 @@ export const BuyerRegistration = () => {
             placeholder="Enter Password"
             {...register('password', {
               required: 'Password is Required',
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
+                message:
+                  'Password must contain at least 1 small letter, 1 capital letter, 1 symbol,',
+              },
               minLength: {
                 value: 8,
                 message: 'Password must be atleast 8 characters',
@@ -60,7 +65,7 @@ export const BuyerRegistration = () => {
               trigger('password')
             }}
           />{' '}
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
         </div>
@@ -81,7 +86,7 @@ export const BuyerRegistration = () => {
               trigger('confirmPassword')
             }}
           />{' '}
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
           </div>
         </div>
@@ -106,7 +111,7 @@ export const BuyerRegistration = () => {
               trigger('phoneNumber')
             }}
           />{' '}
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
           </div>
         </div>
