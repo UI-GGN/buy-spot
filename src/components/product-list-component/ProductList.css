@@ -1,0 +1,25 @@
+.product-container {
+    padding: 0px 200px 0px 200px;
+}
+
+.featured-products {
+    font-size: 34px;
+    padding-bottom: 50px;
+    font-weight: 400;
+    color: black;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+}
+
+.product-inner-container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    row-gap: 20px;
+}
+
+.product-list {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #fff9fc;
+}
