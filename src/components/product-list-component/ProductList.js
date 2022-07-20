@@ -24,7 +24,7 @@ const ProductList = () => {
                     {
                         productdata.map((curProduct) => {
                             return (
-                                <Product category={curProduct.category} image={curProduct.image} price={curProduct.price} id={curProduct.id} />
+                                <Product category={curProduct.category} image={curProduct.image} price={curProduct.price} key={curProduct.id} />
                             )
                         })
                     }

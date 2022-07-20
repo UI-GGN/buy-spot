@@ -9,9 +9,10 @@ const BannerSlider = () => {
       interval={2000}
       animation="slide"
       className="custom-banner-slider"
-    >
-      {images.map((image, i) => (
-        <img src={image} className="banner-slider" />
+      data-testid="banner-slider-carousel" >
+        
+      {images.map((image,i) => (
+        <img key={i} src={image} className="banner-slider"  />
       ))}
     </Carousel>
   )
