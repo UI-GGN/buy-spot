@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import validation from './Validation'
 import { useDispatch, useSelector } from 'react-redux'
 import './Form.css'
+import { Alert } from 'react-bootstrap';
 
 export const BuyerRegistration = () => {
   const [values, setValues] = useState({
@@ -42,6 +43,9 @@ export const BuyerRegistration = () => {
     })
     setSuccessfullyReg(true)
   }
+  const notify = ()=>{
+   Alert("Registered Successfully");
+}
 
   return (
     <div className="register-form">
@@ -59,6 +63,7 @@ export const BuyerRegistration = () => {
             <input
               type="email"
               name="email"
+              data-testId="email"
               value={values.email}
               onChange={handleChange}
               placeholder="Enter email"
@@ -74,6 +79,7 @@ export const BuyerRegistration = () => {
             <input
               type="password"
               name="password"
+              data-testId="password"
               value={values.password}
               onChange={handleChange}
               placeholder="Enter Password"
@@ -89,6 +95,7 @@ export const BuyerRegistration = () => {
             <input
               type="password"
               name="confirmPassword"
+              data-testId="confirmpassword"
               value={values.confirmPassword}
               onChange={handleChange}
               placeholder="Confirm Password"
