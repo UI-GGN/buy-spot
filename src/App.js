@@ -14,16 +14,29 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
+import { useDispatch, useSelector } from 'react-redux'
+
 function App() {
   const [showRegister, setShowRegister] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
 
   const handleCloseRegister = () => setShowRegister(false)
   const handleShowRegister = () => setShowRegister(true)
 
-  const [showLogin, setShowLogin] = useState(false)
-
   const handleCloseLogin = () => setShowLogin(false)
   const handleShowLogin = () => setShowLogin(true)
+  const dispatch = useDispatch()
+
+  const handleLoggedOut = () => {
+    dispatch({
+      type: 'LOGOUT',
+      payload: false,
+    })
+  }
+
+  const userLoggedIn = useSelector((state) => {
+    return state.loggedInUser
+  })
   return (
     <BrowserRouter>
       <div className="App">
@@ -47,43 +60,30 @@ function App() {
                 <Nav.Link style={{ color: 'white' }} as={Link} to="/About">
                   About
                 </Nav.Link>
-                <Nav.Link
-                  style={{ color: 'white' }}
-                  onClick={handleShowRegister}
-                >
-                  Register
-                </Nav.Link>
-                <Modal
-                  className="register-modal"
-                  show={showRegister}
-                  onHide={handleCloseRegister}
-                >
-                  <Modal.Header class="border-0" closeButton>
-                    <Modal.Title>Register</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>You want to Register as</Modal.Body>
-                  <Modal.Footer class="modal-footer border-0">
-                    <Button variant="light" onClick={handleCloseRegister}>
-                      <Link
-                        style={{ textDecoration: 'none', color: 'black' }}
-                        to="/BuyerRegistration"
-                      >
-                        Buyer
-                      </Link>
-                    </Button>
-                    <Button variant="light" onClick={handleCloseRegister}>
-                      <Link
-                        style={{ textDecoration: 'none', color: 'black' }}
-                        to="/SellerRegistration"
-                      >
-                        Seller
-                      </Link>
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-                <Nav.Link style={{ color: 'white' }} onClick={handleShowLogin}>
-                  Login
-                </Nav.Link>
+                {userLoggedIn ? (
+                  <Nav.Link
+                    style={{ color: 'white' }}
+                    onClick={handleLoggedOut}
+                  >
+                    Logout
+                  </Nav.Link>
+                ) : (
+                  <span>
+                    <Nav.Link
+                      style={{ color: 'white' }}
+                      onClick={handleShowRegister}
+                    >
+                      Register
+                    </Nav.Link>
+
+                    <Nav.Link
+                      style={{ color: 'white' }}
+                      onClick={handleShowLogin}
+                    >
+                      Login
+                    </Nav.Link>
+                  </span>
+                )}
                 <Modal
                   className="login-modal"
                   show={showLogin}
@@ -106,6 +106,35 @@ function App() {
                       <Link
                         style={{ textDecoration: 'none', color: 'black' }}
                         to="/SellerLogin"
+                      >
+                        Seller
+                      </Link>
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
+                <Modal
+                  className="register-modal"
+                  show={showRegister}
+                  onHide={handleCloseRegister}
+                >
+                  <Modal.Header class="border-0" closeButton>
+                    <Modal.Title>Register</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>You want to Register as</Modal.Body>
+                  <Modal.Footer class="modal-footer border-0">
+                    <Button variant="light" onClick={handleCloseRegister}>
+                      <Link
+                        style={{ textDecoration: 'none', color: 'black' }}
+                        to="/BuyerRegistration"
+                      >
+                        Buyer
+                      </Link>
+                    </Button>
+                    <Button variant="light" onClick={handleCloseRegister}>
+                      <Link
+                        style={{ textDecoration: 'none', color: 'black' }}
+                        to="/SellerRegistration"
                       >
                         Seller
                       </Link>

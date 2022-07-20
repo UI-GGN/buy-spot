@@ -1,125 +1,124 @@
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import validation from './Validation'
+import { useDispatch, useSelector } from 'react-redux'
 import './Form.css'
 
 export const BuyerRegistration = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    phoneNumber: '',
+  })
 
-    trigger,
-    getValues,
-  } = useForm({ mode: 'onChange' })
+  const [errors, setErrors] = useState({})
 
-  const onSubmit = (data) => {}
+  const handleChange = (e) => {
+    setErrors(validation(values))
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const dispatch = useDispatch()
+
+  const [successfullyReg, setSuccessfullyReg] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setErrors(validation(values))
+    console.log(values.email)
+    console.log(values.password)
+    dispatch({
+      type: 'REGISTER',
+      payload: {
+        id: new Date().getTime(),
+        email: values.email,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+        phoneNumber: values.phoneNumber,
+      },
+    })
+    setSuccessfullyReg(true)
+  }
 
   return (
     <div className="register-form">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>Buyer Registration</h3>
-
-        <div className="form-inputs">
-          <label>Email address</label>
-          <input
-            type="email"
-            placeholder="Enter email"
-            {...register('email', {
-              required: 'Email is Required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address',
-              },
-            })}
-            onKeyUp={() => {
-              trigger('email')
-            }}
-          />
-          <div style={{ height: '36px' }}>
-            {errors.email && <p>{errors.email.message}</p>}
-          </div>
+      {successfullyReg ? (
+        <div>
+          <h3>successfully registered</h3>
+          <a href="/">Home</a>
         </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <h3>Buyer Registration</h3>
 
-        <div className="form-inputs">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            {...register('password', {
-              required: 'Password is Required',
-              pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
-                message:
-                  'Password must contain at least 1 small letter, 1 capital letter, 1 symbol,',
-              },
-              minLength: {
-                value: 8,
-                message: 'Password must be atleast 8 characters',
-              },
-              maxLength: {
-                value: 15,
-                message: 'Password must not exceed 15 characters',
-              },
-            })}
-            onKeyUp={() => {
-              trigger('password')
-            }}
-          />{' '}
-          <div style={{ height: '36px' }}>
-            {errors.password && <p>{errors.password.message}</p>}
+          <div className="form-inputs">
+            <label>Email address</label>
+            <input
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              placeholder="Enter email"
+              onKeyUp={handleChange}
+            />
+            <div style={{ height: '36px' }}>
+              {errors.email && <p>{errors.email}</p>}
+            </div>
           </div>
-        </div>
 
-        <div className="form-inputs">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            {...register('confirmPassword', {
-              required: 'Password is Required',
-              validate: {
-                confirmPassword: (value) =>
-                  value === getValues().password || 'Passwords do not match!',
-              },
-            })}
-            onKeyUp={() => {
-              trigger('confirmPassword')
-            }}
-          />{' '}
-          <div style={{ height: '36px' }}>
-            {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          <div className="form-inputs">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              placeholder="Enter Password"
+              onKeyUp={handleChange}
+            />{' '}
+            <div style={{ height: '36px' }}>
+              {errors.password && <p>{errors.password}</p>}
+            </div>
           </div>
-        </div>
 
-        <div className="form-inputs">
-          <label>Phone Number</label>
-          <input
-            type="number"
-            placeholder="Phone Number"
-            {...register('phoneNumber', {
-              required: 'Phone Number is Required',
-              minLength: {
-                value: 10,
-                message: 'Phone Number must be 10 characters',
-              },
-              maxLength: {
-                value: 10,
-                message: 'Phone Number must be 10 characters',
-              },
-            })}
-            onKeyUp={() => {
-              trigger('phoneNumber')
-            }}
-          />{' '}
-          <div style={{ height: '36px' }}>
-            {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
+          <div className="form-inputs">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={values.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              onKeyUp={handleChange}
+            />{' '}
+            <div style={{ height: '36px' }}>
+              {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+            </div>
           </div>
-        </div>
 
-        <button variant="primary" type="submit" disabled={isDirty && isValid}>
-          Submit
-        </button>
-      </form>
+          <div className="form-inputs">
+            <label>Phone Number</label>
+            <input
+              type="number"
+              name="phoneNumber"
+              value={values.phoneNumber}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              onKeyUp={handleChange}
+            />{' '}
+            <div style={{ height: '36px' }}>
+              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+            </div>
+          </div>
+
+          <button variant="primary" type="submit">
+            Submit
+          </button>
+        </form>
+      )}
     </div>
   )
 }

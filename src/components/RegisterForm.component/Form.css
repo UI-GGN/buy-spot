@@ -38,8 +38,8 @@ form input {
 }
 
 form button {
-  background-color: rgb(156, 120, 120);
-  color: white;
+  background-color: #cb5656;
+  color: #f1eaea;
   padding: 6px 14px;
   font-weight: bold;
   border-radius: 5px;
@@ -49,8 +49,8 @@ form button {
 
 button:disabled,
 button[disabled] {
-  background-color: #cb5656;
-  color: #f1eaea;
+  background-color: rgb(156, 120, 120);
+  color: white;
 }
 
 body {
