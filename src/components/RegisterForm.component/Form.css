@@ -45,6 +45,8 @@ form button {
   border-radius: 5px;
   border: none;
   margin-top: 10px;
+  position: relative;
+  left: 40%;
 }
 
 button:disabled,
@@ -67,4 +69,34 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.success-page {
+  display: inline-block;
+  text-align: start;
+  width: 40%;
+  height: 200px;
+  background-color: rgb(0, 0, 0, 0.8);
+  color: white;
+  padding: 4%;
+  border-radius: 10px;
+  box-shadow: 8px 8px 10px #000;
+  position: relative;
+  top: 150px;
+}
+
+.success-page a {
+  background-color: #cb5656;
+  color: #f1eaea;
+  padding: 6px 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  left: 35%;
+}
+
+.nav-loggedout {
+  display: flex;
 }

@@ -46,9 +46,9 @@ export const BuyerRegistration = () => {
   return (
     <div className="register-form">
       {successfullyReg ? (
-        <div>
+        <div className="success-page">
           <h3>successfully registered</h3>
-          <a href="/">Home</a>
+          <a href="/">Go to Homepage</a>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>

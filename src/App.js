@@ -68,7 +68,7 @@ function App() {
                     Logout
                   </Nav.Link>
                 ) : (
-                  <span>
+                  <div style={{ display: 'flex' }}>
                     <Nav.Link
                       style={{ color: 'white' }}
                       onClick={handleShowRegister}
@@ -82,7 +82,7 @@ function App() {
                     >
                       Login
                     </Nav.Link>
-                  </span>
+                  </div>
                 )}
                 <Modal
                   className="login-modal"
