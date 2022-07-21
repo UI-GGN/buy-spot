@@ -1,4 +1,4 @@
-const Validation = (values) => {
+const validation = (values) => {
   let errors = {}
 
   if (!values.email) {
@@ -39,4 +39,4 @@ const Validation = (values) => {
   return errors
 }
 
-export default Validation
+export default validation
