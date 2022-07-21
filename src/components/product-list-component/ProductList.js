@@ -24,7 +24,7 @@ const ProductList = () => {
             <div className="product-container">
                 <div className="product-inner-container">
                     {
-                        productdata.map((curProduct) => {
+                        productdata.slice(1,16).map((curProduct) => {
                             return (
                                 <Product category={curProduct.category} image={curProduct.image} price={curProduct.price} key={curProduct.id} />
                             )
