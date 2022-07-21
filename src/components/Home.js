@@ -10,10 +10,10 @@ import './footer-component/Footer.css';
 
 export const Home = () => {
   return (
-<div>
-      <BannerSlider/>
-      <ProductList/>
-      <Footer/>
+    <div>
+      <BannerSlider />
+      <ProductList />
+      <Footer />
     </div>
   )
 }

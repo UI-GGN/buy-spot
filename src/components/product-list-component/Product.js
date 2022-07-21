@@ -12,12 +12,12 @@ const Product = (props) => {
         <div className="category">{props.category}</div>
 
 
-   {user === 'abc' &&
-        <div className="price">
-          <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
-          {props.price}
-        </div> } 
-        
+        {user === 'abc' &&
+          <div className="price">
+            <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
+            {props.price}
+          </div>}
+
       </div>
     </div>
   )

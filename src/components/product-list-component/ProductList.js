@@ -18,8 +18,8 @@ const ProductList = () => {
 
     return (
         <div className="product-list" data-testid="product-list">
-            <div className="featured-products"> 
-            Featured Products
+            <div className="featured-products">
+                Featured Products
             </div>
             <div className="product-container">
                 <div className="product-inner-container">

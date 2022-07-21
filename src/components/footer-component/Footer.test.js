@@ -1,8 +1,8 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Footer from './Footer';
 
-test('should return footer text when footer rendered', () => {
+test('should render Footer component', () => {
   render(<Footer />);
-  const linkElement = screen.getByText("@BuySpot All Rights Reserved");
+  const linkElement = screen.getByText('@BuySpot All Rights Reserved');
   expect(linkElement).toBeInTheDocument();
 });
