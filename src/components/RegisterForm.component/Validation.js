@@ -1,4 +1,4 @@
-const Validation = (values) => {
+const validation = (values) => {
   let errors = {}
 
   if (
@@ -51,4 +51,4 @@ const Validation = (values) => {
   return errors
 }
 
-export default Validation
+export default validation

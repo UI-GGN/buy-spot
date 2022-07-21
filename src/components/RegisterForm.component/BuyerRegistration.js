@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import validation from './Validation'
 import { useDispatch } from 'react-redux'
 import './Form.css'
+
 import { Link } from 'react-router-dom'
 
 export const BuyerRegistration = () => {
