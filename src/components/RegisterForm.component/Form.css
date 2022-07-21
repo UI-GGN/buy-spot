@@ -1,6 +1,6 @@
 .form-inputs p {
   color: red;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-align: left;
 }
 
@@ -8,7 +8,6 @@ form {
   display: inline-block;
   text-align: start;
   width: 30%;
-  height: 50%;
   background-color: rgb(0, 0, 0, 0.8);
   color: white;
   padding: 2%;
@@ -38,21 +37,63 @@ form input {
 }
 
 form button {
-  background-color: rgb(212, 74, 74);
-  color: white;
+  background-color: #cb5656;
+  color: #f1eaea;
   padding: 6px 14px;
   font-weight: bold;
   border-radius: 5px;
   border: none;
   margin-top: 10px;
+  position: relative;
+  left: 40%;
 }
 
-form button:hover {
-  background-color: rgb(163, 60, 60);
+button:disabled,
+button[disabled] {
+  background-color: rgb(156, 120, 120);
+  color: white;
 }
 
-body {
+.register-form,
+.login-form {
+  height: 100vh;
   background-image: url('https://media.istockphoto.com/photos/emotional-asian-man-wearing-hoodie-picture-id1318342740?b=1&k=20&m=1318342740&s=170667a&w=0&h=xjtQs93sPxbYFDAo_lpw4toElnKy-fwlbuCJ64vl20o=');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.success-page {
+  display: inline-block;
+  text-align: start;
+  width: 40%;
+  height: 200px;
+  background-color: rgb(0, 0, 0, 0.8);
+  color: white;
+  padding: 4%;
+  border-radius: 10px;
+  box-shadow: 8px 8px 10px #000;
+  position: relative;
+  top: 150px;
+}
+
+.success-page a {
+  background-color: #cb5656;
+  color: #f1eaea;
+  padding: 6px 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  left: 35%;
 }

@@ -5,17 +5,12 @@ export const SellerLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    value,
-    pattern,
-    trigger,
-    getValues,
-  } = useForm()
+    formState: { errors, isDirty, isValid },
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+    trigger,
+  } = useForm({ mode: 'onChange' })
+
+  const onSubmit = (data) => {}
 
   return (
     <div className="login-form">
@@ -51,8 +46,12 @@ export const SellerLogin = () => {
             {...register('password', {
               required: 'Password is Required',
               minLength: {
-                value: 6,
-                message: 'Password need to be 6 characters',
+                value: 8,
+                message: 'Password must be atleast 8 characters',
+              },
+              maxLength: {
+                value: 15,
+                message: 'Password must not exceed 15 characters',
               },
             })}
             onKeyUp={() => {
@@ -64,7 +63,7 @@ export const SellerLogin = () => {
           </div>
         </div>
 
-        <button variant="primary" type="submit">
+        <button variant="primary" type="submit" disabled={isDirty && isValid}>
           Login
         </button>
       </form>
