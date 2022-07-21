@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import validation from './Validation'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './Form.css'
+import { Link } from 'react-router-dom'
 
 export const BuyerRegistration = () => {
   const [values, setValues] = useState({
@@ -23,13 +24,12 @@ export const BuyerRegistration = () => {
 
   const dispatch = useDispatch()
 
-  const [successfullyReg, setSuccessfullyReg] = useState(false)
+  const [isSubmit, setIsSubmit] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors(validation(values))
-    console.log(values.email)
-    console.log(values.password)
+
     dispatch({
       type: 'REGISTER',
       payload: {
@@ -40,15 +40,20 @@ export const BuyerRegistration = () => {
         phoneNumber: values.phoneNumber,
       },
     })
-    setSuccessfullyReg(true)
+    setIsSubmit(true)
   }
 
   return (
     <div className="register-form">
-      {successfullyReg ? (
-        <div className="success-page">
-          <h3>successfully registered</h3>
-          <a href="/">Go to Homepage</a>
+      {Object.keys(errors).length === 0 && isSubmit ? (
+        <div>
+          <h3>Successfully Registered</h3>
+          <Link
+            style={{ textDecoration: 'none', color: 'black' }}
+            to="/buyer-login"
+          >
+            Buyer
+          </Link>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -114,7 +119,17 @@ export const BuyerRegistration = () => {
             </div>
           </div>
 
-          <button variant="primary" type="submit">
+          <button
+            variant="primary"
+            type="submit"
+            disabled={
+              Object.keys(errors).length !== 0 ||
+              !values.email ||
+              !values.password ||
+              !values.confirmPassword ||
+              !values.phoneNumber
+            }
+          >
             Submit
           </button>
         </form>

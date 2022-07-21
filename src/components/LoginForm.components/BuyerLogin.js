@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import validation from '../RegisterForm.component/Validation'
 
 export const BuyerLogin = () => {
   const [values, setValues] = useState({
@@ -39,6 +38,20 @@ export const BuyerLogin = () => {
     } else {
       alert('Invalid Credentials!')
     }
+  }
+
+  const validation = (values) => {
+    let errors = {}
+
+    if (!values.email) {
+      console.log('valid')
+      errors.email = 'Email is required'
+    }
+
+    if (!values.password) {
+      errors.password = 'Password is required'
+    }
+    return errors
   }
 
   const handleSubmit = (e) => {
@@ -85,7 +98,15 @@ export const BuyerLogin = () => {
           </div>
         </div>
 
-        <button variant="primary" type="submit">
+        <button
+          variant="primary"
+          type="submit"
+          disabled={
+            Object.keys(errors).length !== 0 ||
+            !values.email ||
+            !values.password
+          }
+        >
           Login
         </button>
       </form>

@@ -13,6 +13,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -37,6 +38,11 @@ function App() {
   const userLoggedIn = useSelector((state) => {
     return state.loggedInUser
   })
+
+  const userEmail = useSelector((state) => {
+    return state.users.map((user) => user.email)
+  })
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -57,16 +63,19 @@ function App() {
                 <Nav.Link style={{ color: 'white' }} as={Link} to="/">
                   Home
                 </Nav.Link>
-                <Nav.Link style={{ color: 'white' }} as={Link} to="/About">
+                <Nav.Link style={{ color: 'white' }} as={Link} to="/about">
                   About
                 </Nav.Link>
                 {userLoggedIn ? (
-                  <Nav.Link
+                  <NavDropdown
+                    title={userEmail}
                     style={{ color: 'white' }}
-                    onClick={handleLoggedOut}
+                    id="basic-nav-dropdown"
                   >
-                    Logout
-                  </Nav.Link>
+                    <NavDropdown.Item onClick={handleLoggedOut}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
                 ) : (
                   <div style={{ display: 'flex' }}>
                     <Nav.Link
@@ -97,7 +106,7 @@ function App() {
                     <Button variant="light" onClick={handleCloseLogin}>
                       <Link
                         style={{ textDecoration: 'none', color: 'black' }}
-                        to="/BuyerLogin"
+                        to="/buyer-login"
                       >
                         Buyer
                       </Link>
@@ -105,7 +114,7 @@ function App() {
                     <Button variant="light" onClick={handleCloseLogin}>
                       <Link
                         style={{ textDecoration: 'none', color: 'black' }}
-                        to="/SellerLogin"
+                        to="/seller-login"
                       >
                         Seller
                       </Link>
@@ -126,7 +135,7 @@ function App() {
                     <Button variant="light" onClick={handleCloseRegister}>
                       <Link
                         style={{ textDecoration: 'none', color: 'black' }}
-                        to="/BuyerRegistration"
+                        to="/buyer-registration"
                       >
                         Buyer
                       </Link>
@@ -134,7 +143,7 @@ function App() {
                     <Button variant="light" onClick={handleCloseRegister}>
                       <Link
                         style={{ textDecoration: 'none', color: 'black' }}
-                        to="/SellerRegistration"
+                        to="/seller-registration"
                       >
                         Seller
                       </Link>
@@ -147,18 +156,18 @@ function App() {
         </Navbar>
         <div>
           <Routes>
-            <Route path="/About" element={<About />}></Route>
+            <Route path="/about" element={<About />}></Route>
             <Route path="/" element={<Home />}></Route>
             <Route
-              path="/BuyerRegistration"
+              path="/buyer-registration"
               element={<BuyerRegistration />}
             ></Route>
             <Route
-              path="/SellerRegistration"
+              path="/seller-registration"
               element={<SellerRegistration />}
             ></Route>
-            <Route path="/BuyerLogin" element={<BuyerLogin />}></Route>
-            <Route path="/SellerLogin" element={<SellerLogin />}></Route>
+            <Route path="/buyer-login" element={<BuyerLogin />}></Route>
+            <Route path="/seller-login" element={<SellerLogin />}></Route>
           </Routes>
         </div>
       </div>

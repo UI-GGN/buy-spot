@@ -4,12 +4,10 @@ const intitialState = {
   users: [],
   loggedInUser: false,
 }
-console.log(intitialState)
 
 const reducer = (state = intitialState, action) => {
   switch (action.type) {
     case 'REGISTER':
-      console.log(action.payload)
       return {
         ...state,
         users: [...state.users, action.payload],

@@ -15,7 +15,7 @@ export const SellerRegistration = () => {
   const onSubmit = (data) => {}
 
   return (
-    <div>
+    <div className="register-form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Seller Registration</h3>
 
