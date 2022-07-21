@@ -68,8 +68,7 @@ function App() {
                 </Nav.Link>
                 {userLoggedIn ? (
                   <NavDropdown
-                    title={userEmail}
-                    style={{ color: 'white' }}
+                    title={<sapn style={{ color: 'white' }}>{userEmail}</sapn>}
                     id="basic-nav-dropdown"
                   >
                     <NavDropdown.Item onClick={handleLoggedOut}>

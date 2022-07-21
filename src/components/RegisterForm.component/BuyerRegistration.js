@@ -47,13 +47,10 @@ export const BuyerRegistration = () => {
   return (
     <div className="register-form">
       {Object.keys(errors).length === 0 && isSubmit ? (
-        <div>
+        <div className="success-page">
           <h3>Successfully Registered</h3>
-          <Link
-            style={{ textDecoration: 'none', color: 'black' }}
-            to="/buyer-login"
-          >
-            Buyer
+          <Link className="success-page-link" to="/buyer-login">
+            Login as Buyer
           </Link>
         </div>
       ) : (
