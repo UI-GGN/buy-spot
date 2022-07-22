@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { faL } from '@fortawesome/free-solid-svg-icons'
 
 export const BuyerLogin = () => {
   const [values, setValues] = useState({
-    email: '',
-    password: '',
+    email: undefined,
+    password: undefined,
   })
 
   const [errors, setErrors] = useState({})
+  const [isValid, setValidUser] = useState(true)
 
   const users = useSelector((state) => state.users)
   const dispatch = useDispatch()
@@ -16,7 +18,7 @@ export const BuyerLogin = () => {
   const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setErrors(validation(values))
+    setErrors(validation(values, e.target['name']))
     setValues({
       ...values,
       [e.target.name]: e.target.value,
@@ -28,7 +30,7 @@ export const BuyerLogin = () => {
       (user) =>
         user.email === values.email && user.password === values.password,
     )
-    console.log(payload)
+
     if (payload) {
       dispatch({
         type: 'LOGIN',
@@ -36,31 +38,31 @@ export const BuyerLogin = () => {
       })
       navigate('/')
     } else {
-      alert('Invalid Credentials!')
+      setValidUser(false)
     }
   }
 
-  const validation = (values) => {
+  const validation = (values, name) => {
     let errors = {}
 
-    if (!values.email) {
-      console.log('valid')
-      errors.email = 'Email is required'
+    if (name === 'email') {
+      if (!values.email) {
+        errors.email = 'Email is required'
+      }
     }
 
-    if (!values.password) {
-      errors.password = 'Password is required'
+    if (name === 'password') {
+      if (!values.password) {
+        errors.password = 'Password is required'
+      }
     }
     return errors
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setErrors(validation(values))
-    verifyExistingUser()
 
-    console.log('handle')
-    console.log('payload')
+    verifyExistingUser()
   }
 
   return (
@@ -95,6 +97,11 @@ export const BuyerLogin = () => {
           />
           <div style={{ height: '30px' }}>
             {errors.password && <p>{errors.password}</p>}
+            {isValid ? (
+              <div className="hidden"></div>
+            ) : (
+              <p>Please enter valid credentials</p>
+            )}
           </div>
         </div>
 

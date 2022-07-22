@@ -97,3 +97,7 @@ input[type='number'] {
   position: relative;
   top: 20px;
 }
+
+.hidden {
+  display: none;
+}

@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom'
 
 export const BuyerRegistration = () => {
   const [values, setValues] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phoneNumber: '',
+    email: undefined,
+    password: undefined,
+    confirmPassword: undefined,
+    phoneNumber: undefined,
   })
 
   const [errors, setErrors] = useState({})
 
   const handleChange = (e) => {
-    setErrors(validation(values))
+    setErrors(validation(values, e.target['name']))
     setValues({
       ...values,
       [e.target.name]: e.target.value,
@@ -29,7 +29,6 @@ export const BuyerRegistration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setErrors(validation(values))
 
     dispatch({
       type: 'REGISTER',
