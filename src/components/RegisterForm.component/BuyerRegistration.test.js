@@ -15,6 +15,13 @@ const mockState = {
 const mockStore = configureStore();
 const store = mockStore(mockState);
 
+const user={
+    email:'xyz@gmail.com',
+    password:'Abcd@1234',
+    confirmPassword:'Abcd@1234',
+    phoneNumber:9839461752
+}
+
 describe('Buyer Registration Components', () => {
 
     describe(' should render all the input fields and button inside form', () => {
@@ -64,16 +71,6 @@ describe('Buyer Registration Components', () => {
             expect(errorMessage).toBeInTheDocument();
         })
 
-        test('should show error for Password greater than 15', () => {
-            render(<Provider store={store}>
-                <BuyerRegistration />
-            </Provider>);
-            const passwordField = screen.getByPlaceholderText('Enter Password');
-            userEvent.type(passwordField, 'Abcd@23467890932')
-            const errorMessage = screen.getByText('Password must not contain more than 15 characters');
-            expect(errorMessage).toBeInTheDocument();
-        })
-
         test('should show error for Invalid email', () => {
             render(<Provider store={store}>
                 <BuyerRegistration />
@@ -107,66 +104,19 @@ describe('Buyer Registration Components', () => {
             expect(errorMessage).toBeInTheDocument();
         })
 
-        test('Should Register successfully on submit button', () => {
+        xtest('Should Register successfully on submit button', () => {
 
             render(<Provider store={store}>
                 <BuyerRegistration />
             </Provider>);
             const successn = screen.getByRole(Button);
             expect(handlesubmit()).toBeCalled();
-
         })
-
-
     })
-
-
-
-
 })
 
 
 
-
-//should pass if email is not valid
-xtest('should accept email if the email is not valid', () => {
-    render(<BuyerRegistration />)
-    const emailElement = screen.getByTestId('email');
-    //expect('Invalid email address').toBeInvalid;
-    expect(emailElement).toBeTruthy;
-})
-
-//Should show error if Password is not of 6 characters
-xtest('should show error if Password is not of 6 characters', () => {
-    render(<BuyerRegistration />)
-    const passwordElement = screen.getByTestId('password');
-    expect(passwordElement).toBeChecked;
-})
-
-
-//should show error if the password and confirm password is different 
-xtest('should show error if Password and confirm password is different ', () => {
-    render(<BuyerRegistration />)
-    const passwordElement = screen.getByTestId('password');
-    const confirmPasswordElement = screen.findAllByTestId('confirmpassword');
-    //passwordElement.matches(confirmPasswordElement) ? expect(toBeValid) : expect(toBeInvalid);
-    expect(toBeInvalid);
-})
-
-{/* Testing using mock  */ }
-
-it("renders user data", async () => {
-    const fakeuser = {
-        email: 'xyz@gmail.com',
-        password: 'Abcd@1234',
-        confirmpassword: 'Abcd@1234'
-    };
-    jest.spyOn(global, "fetch").mockImplementation(() =>
-
-        Promise.resolve({
-            json: () => Promise.resolve(fakeuser)
-        }))
-});
 
 
 
