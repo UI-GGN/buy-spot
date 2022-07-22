@@ -5,17 +5,12 @@ export const SellerLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    value,
-    pattern,
-    trigger,
-    getValues,
-  } = useForm()
+    formState: { errors, isDirty, isValid },
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+    trigger,
+  } = useForm({ mode: 'onChange' })
+
+  const onSubmit = (data) => {}
 
   return (
     <div className="login-form">
@@ -68,7 +63,7 @@ export const SellerLogin = () => {
           </div>
         </div>
 
-        <button variant="primary" type="submit">
+        <button variant="primary" type="submit" disabled={isDirty && isValid}>
           Login
         </button>
       </form>

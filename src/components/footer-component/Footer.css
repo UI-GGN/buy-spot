@@ -1,0 +1,8 @@
+.footer-container {
+    background-color: rgb(14, 13, 13);
+    min-height: 30px;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    font-size: 16px;
+}

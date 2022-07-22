@@ -23,7 +23,8 @@ body {
 }
 
 p {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+  font-family:'Jost';
   text-align: center;
   font-size: large;
   color: #fff;

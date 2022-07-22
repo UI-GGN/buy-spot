@@ -6,20 +6,16 @@ export const SellerRegistration = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    value,
-    pattern,
+    formState: { errors, isDirty, isValid },
+
     trigger,
     getValues,
-  } = useForm()
+  } = useForm({ mode: 'onChange' })
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  const onSubmit = (data) => {}
 
   return (
-    <div>
+    <div className="register-form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Seller Registration</h3>
 
@@ -39,7 +35,7 @@ export const SellerRegistration = () => {
               trigger('email')
             }}
           />{' '}
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.email && <p>{errors.email.message}</p>}
           </div>
         </div>
@@ -51,6 +47,11 @@ export const SellerRegistration = () => {
             placeholder="Enter Password"
             {...register('password', {
               required: 'Password is Required',
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,15}$/,
+                message:
+                  'Password must contain at least 1 small letter, 1 capital letter, 1 symbol',
+              },
               minLength: {
                 value: 8,
                 message: 'Password must be atleast 8 characters',
@@ -64,7 +65,7 @@ export const SellerRegistration = () => {
               trigger('password')
             }}
           />{' '}
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
         </div>
@@ -85,7 +86,7 @@ export const SellerRegistration = () => {
               trigger('confirmPassword')
             }}
           />
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
           </div>
         </div>
@@ -110,11 +111,11 @@ export const SellerRegistration = () => {
               trigger('phoneNumber')
             }}
           />{' '}
-          <div style={{ height: '30px' }}>
+          <div style={{ height: '36px' }}>
             {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
           </div>
         </div>
-        <button variant="primary" type="submit">
+        <button variant="primary" type="submit" disabled={isDirty && isValid}>
           Submit
         </button>
       </form>
