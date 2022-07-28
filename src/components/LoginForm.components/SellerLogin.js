@@ -1,40 +1,71 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginValidation } from './loginValidation'
 
 export const SellerLogin = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
+  const [values, setValues] = useState({
+    email: undefined,
+    password: undefined,
+    role: 'seller',
+  })
 
-    trigger,
-  } = useForm({ mode: 'onChange' })
+  const [errors, setErrors] = useState({})
+  const [isValid, setValidUser] = useState(true)
 
-  const onSubmit = (data) => {}
+  const users = useSelector((state) => state.users)
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setErrors(loginValidation(values, e.target['name']))
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const verifyExistingUser = () => {
+    const payload = !!users.find(
+      (user) =>
+        user.email === values.email && user.password === values.password && user.role === values.role,
+    )
+
+    if (payload) {
+      dispatch({
+        type: 'LOGIN',
+        payload: payload,
+      })
+      navigate('/')
+    } else {
+      setValidUser(false)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    verifyExistingUser()
+  }
 
   return (
     <div className="login-form">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <h3>Seller Login</h3>
 
         <div className="form-inputs">
           <label>Email address</label>
           <input
             type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
             placeholder="Enter email"
-            {...register('email', {
-              required: 'Email is Required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address',
-              },
-            })}
-            onKeyUp={() => {
-              trigger('email')
-            }}
+            onKeyUp={handleChange}
           />
           <div style={{ height: '30px' }}>
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && <p>{errors.email}</p>}
           </div>
         </div>
 
@@ -42,29 +73,32 @@ export const SellerLogin = () => {
           <label>Password</label>
           <input
             type="password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
             placeholder="Enter Password"
-            {...register('password', {
-              required: 'Password is Required',
-              minLength: {
-                value: 8,
-                message: 'Password must be atleast 8 characters',
-              },
-              maxLength: {
-                value: 15,
-                message: 'Password must not exceed 15 characters',
-              },
-            })}
-            onKeyUp={() => {
-              trigger('password')
-            }}
-          />{' '}
+            onKeyUp={handleChange}
+          />
           <div style={{ height: '30px' }}>
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && <p>{errors.password}</p>}
+            {isValid ? (
+              <div className="hidden"></div>
+            ) : (
+              <p>Please enter valid credentials</p>
+            )}
           </div>
         </div>
 
-        <button variant="primary" type="submit" disabled={isDirty && isValid}>
-          Login
+        <button
+          variant="primary"
+          type="submit"
+          disabled={
+            Object.keys(errors).length !== 0 ||
+            !values.email ||
+            !values.password 
+          }
+        >
+          Submit
         </button>
       </form>
     </div>

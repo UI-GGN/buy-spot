@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { faL } from '@fortawesome/free-solid-svg-icons'
 
 export const BuyerLogin = () => {
   const [values, setValues] = useState({
     email: undefined,
     password: undefined,
+    role: 'buyer',
   })
 
   const [errors, setErrors] = useState({})
@@ -28,13 +28,14 @@ export const BuyerLogin = () => {
   const verifyExistingUser = () => {
     const payload = !!users.find(
       (user) =>
-        user.email === values.email && user.password === values.password,
+        user.email === values.email && user.password === values.password && user.role === values.role,
     )
 
     if (payload) {
       dispatch({
         type: 'LOGIN',
         payload: payload,
+        role: 'buyer'
       })
       navigate('/')
     } else {
@@ -114,7 +115,7 @@ export const BuyerLogin = () => {
             !values.password
           }
         >
-          Login
+          Submit
         </button>
       </form>
     </div>
