@@ -11,6 +11,7 @@ export const BuyerRegistration = () => {
     password: undefined,
     confirmPassword: undefined,
     phoneNumber: undefined,
+    role: "buyer"
   })
 
   const [errors, setErrors] = useState({})
