@@ -16,11 +16,13 @@ const Product = (props) => {
   return (
     <div className="col-md-4 custom-product" data-testid={'product'}>
       {showProductPage ? (
-        <Link to="/product-describe" className="product-page-link">
+        <Link to="/product-description" className="product-page-link">
           <div
             className="col-md-4 custom-product"
             data-testid={'product'}
-          ></div>
+          >
+            
+          </div>
           <img src={props.image} alt="products" className="img" />
           <div className="product-label">
             <div className="category">{props.category}</div>

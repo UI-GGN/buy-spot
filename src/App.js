@@ -15,7 +15,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { useDispatch, useSelector } from 'react-redux'
-import {ProductDescription} from './components/product-list-component/product-description/product-description.component'
+import { ProductDescription } from './components/product-list-component/product-description/product-description.component'
 
 function App() {
   const [showRegister, setShowRegister] = useState(false)
@@ -167,7 +167,7 @@ function App() {
             ></Route>
             <Route path="/buyer-login" element={<BuyerLogin />}></Route>
             <Route path="/seller-login" element={<SellerLogin />}></Route>
-            <Route path="/product-describe" element={<ProductDescription/>}></Route>
+            <Route path="/product-description" element={<ProductDescription/>}></Route>
           </Routes>
         </div>
       </div>
