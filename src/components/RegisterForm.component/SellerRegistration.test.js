@@ -2,6 +2,7 @@ import {render, screen} from "@testing-library/react";
 import {Provider} from "react-redux";
 import {SellerRegistration} from "./SellerRegistration";
 import configureStore from "redux-mock-store";
+import userEvent from "@testing-library/user-event";
 
 
 const mockState = {
@@ -22,5 +23,75 @@ describe('Seller Registration Components', () => {
             const emailField = screen.getByPlaceholderText('Enter email');
             expect(emailField).toBeTruthy();
         })
+        test('Password field should be truthy', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+            const passwordField = screen.getByPlaceholderText('Enter Password');
+            expect(passwordField).toBeTruthy();
+        })
+
+        test('Confirm Password field should be truthy', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+            const confirmPasswordField = screen.getByPlaceholderText('Confirm Password');
+            expect(confirmPasswordField).toBeTruthy();
+        })
+
+        test('Phone Number field should be truthy', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+            const phoneNumberField = screen.getByPlaceholderText('Phone Number');
+            expect(phoneNumberField).toBeTruthy();
+        })
+    })
+
+    describe('Validate Input Fields', () => {
+        test('should show error for Invalid password', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+
+            const passwordField = screen.getByPlaceholderText('Enter Password');
+            userEvent.type(passwordField, 'Abcd1234')
+            const errorMessage = screen.getByText('Password must contain at least 8 characaters, 1 small letter, 1 capital letter, 1 symbol, max 15 characters');
+            expect(errorMessage).toBeInTheDocument();
+        })
+
+        test('should show error for Invalid email', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+
+            const emailField = screen.getByPlaceholderText('Enter email');
+            userEvent.type(emailField, 'xyzgmailcom');
+            const errorMessage = screen.getByText('Invalid email address');
+            expect(errorMessage).toBeInTheDocument();
+        })
+
+        test('should show error for invalid PhoneNumber', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+            const phonenumberField = screen.getByPlaceholderText('Phone Number');
+            userEvent.type(phonenumberField, '1234567')
+            const errorMessage = screen.getByText('Phone number must contain 10 characters');
+            expect(errorMessage).toBeInTheDocument();
+        })
+
+        test('should show error for password and confirm password unmatched', () => {
+            render(<Provider store={store}>
+                <SellerRegistration />
+            </Provider>);
+            const passwordField = screen.getByPlaceholderText('Enter Password');
+            const confirmPasswordField = screen.getByPlaceholderText('Confirm Password');
+            userEvent.type(passwordField, 'Abcd1234')
+            userEvent.type(confirmPasswordField, 'Abcd@1234')
+            const errorMessage = screen.getByText('Passwords do not match');
+            expect(errorMessage).toBeInTheDocument();
+        })
+
     })
 })

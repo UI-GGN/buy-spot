@@ -18,7 +18,7 @@ const validation = (values, name) => {
       )
     ) {
       errors.password =
-        'Password must contain at least 8 characaters, 1 small letter, 1 capital letter, 1 symbol, max 15 characterects'
+        'Password must contain at least 8 characaters, 1 small letter, 1 capital letter, 1 symbol, max 15 characters'
     }
   }
   if (name === 'confirmPassword') {
