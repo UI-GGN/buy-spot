@@ -9,7 +9,7 @@ export const SharedModal = (props) => {
   const handleCloseModal = () => props.setShow(false);
 
   return (
-    <Modal className="login-modal" show={props.show} onHide={handleCloseModal}>
+    <Modal className="shared-modal" show={props.show} onHide={handleCloseModal}>
       <Modal.Header class=" border-0" closeButton>
         <Modal.Title>{property}</Modal.Title>
       </Modal.Header>
