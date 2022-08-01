@@ -1,7 +1,9 @@
 import React from 'react'
-import './ProductDescription.css';
+import './product-description.component.css';
+
 
 export const ProductDescription = (props) => {
+    
     return (
         <div class="container">
             {/* Left Column / product Image */}
@@ -15,11 +17,9 @@ export const ProductDescription = (props) => {
 
                 {/* <!-- Product Description -->*/}
                 <div class="product-description">
-                    <h1></h1>
-                    <h1></h1>
-                    <p> 
-                        Name :{props.category}
-                        
+                    <p>
+                        <br>Name :{props.category}</br>
+                        <br>Price:{props.price} </br>
                     </p>
                 </div>
 
