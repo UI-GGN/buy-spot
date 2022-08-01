@@ -16,7 +16,7 @@ const Product = (props) => {
   return (
     <div className="col-md-4 custom-product" data-testid={'product'}>
       {showProductPage ? (
-        <Link to="/product-page" className="product-page-link">
+        <Link to="/product-describe" className="product-page-link">
           <div
             className="col-md-4 custom-product"
             data-testid={'product'}
