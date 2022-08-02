@@ -12,7 +12,7 @@ import { SellerRegistration } from './components/RegisterForm.component/SellerRe
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { useState } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import {SharedModal} from './components/modals/shared-modal';
+import {SharedModal} from './components/modal-component/shared-modal';
 
 import { useDispatch, useSelector } from 'react-redux'
 
