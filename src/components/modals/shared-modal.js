@@ -10,12 +10,12 @@ export const SharedModal = (props) => {
 
   return (
     <Modal className="shared-modal" show={props.show} onHide={handleCloseModal}>
-      <Modal.Header class=" border-0" closeButton>
+      <Modal.Header className=" border-0" closeButton>
         <Modal.Title>{property}</Modal.Title>
       </Modal.Header>
       <Modal.Body>You want to {property} as</Modal.Body>
-      <Modal.Footer class="modal-footer border-0">
-        <Button variant="light" onClick={handleCloseModal}>
+      <Modal.Footer className="modal-footer border-0">
+        <Button variant="light" onClick={handleCloseModal} data-testid="buyerButton" >
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to={property === "Login" ? "/buyer-login" : "/buyer-registration"}
@@ -23,7 +23,7 @@ export const SharedModal = (props) => {
             Buyer
           </Link>
         </Button>
-        <Button variant="light" onClick={handleCloseModal}>
+        <Button variant="light" onClick={handleCloseModal} data-testid="sellerButton">
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to={property === "Login" ? "/seller-login" : "/seller-registration"}
