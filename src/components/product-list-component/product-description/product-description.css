@@ -35,6 +35,18 @@
   margin-bottom: 20px;
 }
 
+.category {
+  border-bottom: 1px solid #E1E8EE;
+  color: #070707;
+  margin-bottom: 20px;
+}
+
+.title {
+  border-bottom: 1px solid #E1E8EE;
+  color: #5d0101;
+  margin-bottom: 20px;
+}
+
 
 .product-description h1 {
   font-weight: 300;
@@ -50,14 +62,19 @@
   line-height: 24px;
 }
 
-
-
-
 /* Product Price */
 .product-price {
   display: flex;
   align-items: center;
 }
+ 
+.product-price span {
+  font-size: 26px;
+  font-weight: 300;
+  color: #43474D;
+  margin-right: 20px;
+}
+ 
 
 .cart-btn {
   display: inline-block;
