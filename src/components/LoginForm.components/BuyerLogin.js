@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { faL } from '@fortawesome/free-solid-svg-icons'
 
 export const BuyerLogin = () => {
   const [values, setValues] = useState({
