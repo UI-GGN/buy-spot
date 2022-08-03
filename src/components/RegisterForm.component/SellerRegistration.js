@@ -7,10 +7,10 @@ import {Link} from "react-router-dom";
 
 export const SellerRegistration = () => {
     const [values, setValues] = useState({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        phoneNumber: "",
+        email: null,
+        password: null,
+        confirmPassword: null,
+        phoneNumber: null,
         role: "seller"
     })
 
@@ -22,7 +22,6 @@ export const SellerRegistration = () => {
             ...values,
             [e.target.name]: e.target.value,
         })
-        console.log(errors)
     }
 
     const dispatch = useDispatch()
@@ -72,6 +71,7 @@ export const SellerRegistration = () => {
                     onChange={handleChange}
                     placeholder="Enter email"
                     onKeyUp={handleChange}
+                    autoComplete="off"
                 />
                 <div style={{height: '36px'}}>
                     {errors.email && <p>{errors.email}</p>}
@@ -87,6 +87,7 @@ export const SellerRegistration = () => {
                     onChange={handleChange}
                     placeholder="Enter Password"
                     onKeyUp={handleChange}
+                    autoComplete="off"
                 />{' '}
                 <div style={{height: '36px'}}>
                     {errors.password && <p>{errors.password}</p>}
@@ -102,6 +103,7 @@ export const SellerRegistration = () => {
                     onChange={handleChange}
                     placeholder="Confirm Password"
                     onKeyUp={handleChange}
+                    autoComplete="off"
                 />{' '}
                 <div style={{height: '36px'}}>
                     {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
@@ -117,6 +119,7 @@ export const SellerRegistration = () => {
                     onChange={handleChange}
                     placeholder="Phone Number"
                     onKeyUp={handleChange}
+                    autoComplete="off"
                 />{' '}
                 <div style={{height: '36px'}}>
                     {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
