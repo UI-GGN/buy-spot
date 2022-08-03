@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
 export const SellerRegistration = () => {
-    const [values, setValues] = useState({
+    const [userDetails, setUserDetails] = useState({
         email: null,
         password: null,
         confirmPassword: null,
@@ -17,13 +17,13 @@ export const SellerRegistration = () => {
     const [errors, setErrors] = useState({})
 
     const handleChange = (e) => {
-        setValues({
-            ...values,
+        setUserDetails({
+            ...userDetails,
             [e.target.name]: e.target.value,
         })
     }
     const handleValidations = (e) => {
-        setErrors(validation(values, e.target['name']))
+        setErrors(validation(userDetails, e.target['name']))
     }
 
     const dispatch = useDispatch()
@@ -38,10 +38,10 @@ export const SellerRegistration = () => {
             type: 'REGISTER',
             payload: {
                 id: new Date().getTime(),
-                email: values.email,
-                password: values.password,
-                confirmPassword: values.confirmPassword,
-                phoneNumber: values.phoneNumber,
+                email: userDetails.email,
+                password: userDetails.password,
+                confirmPassword: userDetails.confirmPassword,
+                phoneNumber: userDetails.phoneNumber,
                 role: "seller"
             },
         })
@@ -69,7 +69,7 @@ export const SellerRegistration = () => {
                         <input
                             type="email"
                             name="email"
-                            value={values.email}
+                            value={userDetails.email}
                             onChange={handleChange}
                             placeholder="Enter email"
                             onKeyUp={handleChange}
@@ -86,7 +86,7 @@ export const SellerRegistration = () => {
                         <input
                             type="password"
                             name="password"
-                            value={values.password}
+                            value={userDetails.password}
                             onChange={handleChange}
                             placeholder="Enter Password"
                             onKeyUp={handleChange}
@@ -103,7 +103,7 @@ export const SellerRegistration = () => {
                         <input
                             type="password"
                             name="confirmPassword"
-                            value={values.confirmPassword}
+                            value={userDetails.confirmPassword}
                             onChange={handleChange}
                             placeholder="Confirm Password"
                             onKeyUp={handleChange}
@@ -120,7 +120,7 @@ export const SellerRegistration = () => {
                         <input
                             type="number"
                             name="phoneNumber"
-                            value={values.phoneNumber}
+                            value={userDetails.phoneNumber}
                             onChange={handleChange}
                             placeholder="Phone Number"
                             onKeyUp={handleChange}
@@ -136,10 +136,10 @@ export const SellerRegistration = () => {
                         type="submit"
                         disabled={
                             Object.keys(errors).length !== 0 ||
-                            !values.email ||
-                            !values.password ||
-                            !values.confirmPassword ||
-                            !values.phoneNumber
+                            !userDetails.email ||
+                            !userDetails.password ||
+                            !userDetails.confirmPassword ||
+                            !userDetails.phoneNumber
                         }
                     >
                         Submit
