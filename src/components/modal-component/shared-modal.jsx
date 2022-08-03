@@ -8,14 +8,15 @@ import './shared-modal.css'
 export const SharedModal = (props) => {
   const property = props.property;
   const handleCloseModal = () => props.setShow(false);
+  const checkLocation = window.location.pathname === "/";
 
   return (
     <Modal className="shared-modal" show={props.show} onHide={handleCloseModal}>
-      <Modal.Header className="modal-header border-0" closeButton >
+      <Modal.Header className= {checkLocation ? "modal-header modal-primary border-0": "modal-header modal-secondary border-0"}  closeButton >
         <Modal.Title>{property}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body">You want to {property} as</Modal.Body>
-      <Modal.Footer className="modal-footer">
+      <Modal.Footer className= {checkLocation ? "modal-footer-primary": "modal-footer-secondary"}>
         <Button variant="light" onClick={handleCloseModal} data-testid="buyerButton" >
           <Link
             style={{ textDecoration: "none", color: "inherit" }}
