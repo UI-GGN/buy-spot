@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 import {Provider} from "react-redux";
 import {SellerRegistration} from "./SellerRegistration";
 import configureStore from "redux-mock-store";
@@ -56,6 +56,7 @@ describe('Seller Registration Components', () => {
 
             const passwordField = screen.getByPlaceholderText('Enter Password');
             userEvent.type(passwordField, 'Abcd1234')
+            fireEvent.focusOut(passwordField)
             const errorMessage = screen.getByText('Password must contain at least 8 characaters, 1 small letter, 1 capital letter, 1 symbol, max 15 characters');
             expect(errorMessage).toBeInTheDocument();
         })
@@ -67,6 +68,7 @@ describe('Seller Registration Components', () => {
 
             const emailField = screen.getByPlaceholderText('Enter email');
             userEvent.type(emailField, 'xyzgmailcom');
+            fireEvent.focusOut(emailField)
             const errorMessage = screen.getByText('Invalid email address');
             expect(errorMessage).toBeInTheDocument();
         })
@@ -77,6 +79,7 @@ describe('Seller Registration Components', () => {
             </Provider>);
             const phonenumberField = screen.getByPlaceholderText('Phone Number');
             userEvent.type(phonenumberField, '1234567')
+            fireEvent.focusOut(phonenumberField)
             const errorMessage = screen.getByText('Phone number must contain 10 characters');
             expect(errorMessage).toBeInTheDocument();
         })
@@ -89,6 +92,7 @@ describe('Seller Registration Components', () => {
             const confirmPasswordField = screen.getByPlaceholderText('Confirm Password');
             userEvent.type(passwordField, 'Abcd1234')
             userEvent.type(confirmPasswordField, 'Abcd@1234')
+            fireEvent.focusOut(confirmPasswordField)
             const errorMessage = screen.getByText('Passwords do not match');
             expect(errorMessage).toBeInTheDocument();
         })

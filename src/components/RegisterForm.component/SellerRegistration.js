@@ -17,11 +17,13 @@ export const SellerRegistration = () => {
     const [errors, setErrors] = useState({})
 
     const handleChange = (e) => {
-        setErrors(validation(values, e.target['name']))
         setValues({
             ...values,
             [e.target.name]: e.target.value,
         })
+    }
+    const handleValidations = (e) => {
+        setErrors(validation(values, e.target['name']))
     }
 
     const dispatch = useDispatch()
@@ -48,98 +50,102 @@ export const SellerRegistration = () => {
     return (
         <div className="register-form">
             {Object.keys(errors).length === 0 && isSubmit ? (
-            <div className="success-page">
-                <h3>Successfully Registered</h3>
-                <Link
-                    style={{textDecoration: 'none', color: 'white'}}
-                    to="/seller-login"
-                    className="success-page-link"
-                >
-                    Login as Seller
-                </Link>
-            </div>
-            ):(
-            <form onSubmit={handleSubmit}>
-            <h3>Seller Registration</h3>
-
-            <div className="form-inputs">
-                <label>Email address</label>
-                <input
-                    type="email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    placeholder="Enter email"
-                    onKeyUp={handleChange}
-                    autoComplete="off"
-                />
-                <div style={{height: '36px'}}>
-                    {errors.email && <p>{errors.email}</p>}
+                <div className="success-page">
+                    <h3>Successfully Registered</h3>
+                    <Link
+                        style={{textDecoration: 'none', color: 'white'}}
+                        to="/seller-login"
+                        className="success-page-link"
+                    >
+                        Login as Seller
+                    </Link>
                 </div>
-            </div>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <h3>Seller Registration</h3>
 
-            <div className="form-inputs">
-                <label>Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    placeholder="Enter Password"
-                    onKeyUp={handleChange}
-                    autoComplete="off"
-                />{' '}
-                <div style={{height: '36px'}}>
-                    {errors.password && <p>{errors.password}</p>}
-                </div>
-            </div>
+                    <div className="form-inputs">
+                        <label>Email address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={values.email}
+                            onChange={handleChange}
+                            placeholder="Enter email"
+                            onKeyUp={handleChange}
+                            autoComplete="off"
+                            onBlur={handleValidations}
+                        />
+                        <div style={{height: '36px'}}>
+                            {errors.email && <p>{errors.email}</p>}
+                        </div>
+                    </div>
 
-            <div className="form-inputs">
-                <label>Confirm Password</label>
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    value={values.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="Confirm Password"
-                    onKeyUp={handleChange}
-                    autoComplete="off"
-                />{' '}
-                <div style={{height: '36px'}}>
-                    {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                </div>
-            </div>
+                    <div className="form-inputs">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={values.password}
+                            onChange={handleChange}
+                            placeholder="Enter Password"
+                            onKeyUp={handleChange}
+                            autoComplete="off"
+                            onBlur={handleValidations}
+                        />{' '}
+                        <div style={{height: '36px'}}>
+                            {errors.password && <p>{errors.password}</p>}
+                        </div>
+                    </div>
 
-            <div className="form-inputs">
-                <label>Phone Number</label>
-                <input
-                    type="number"
-                    name="phoneNumber"
-                    value={values.phoneNumber}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
-                    onKeyUp={handleChange}
-                    autoComplete="off"
-                />{' '}
-                <div style={{height: '36px'}}>
-                    {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
-                </div>
-            </div>
-                <button
-                    variant="primary"
-                    type="submit"
-                    disabled={
-                        Object.keys(errors).length !== 0 ||
-                        !values.email ||
-                        !values.password ||
-                        !values.confirmPassword ||
-                        !values.phoneNumber
-                    }
-                >
-                    Submit
-                </button>
-        </form>
-                )}
-</div>
-)
+                    <div className="form-inputs">
+                        <label>Confirm Password</label>
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            value={values.confirmPassword}
+                            onChange={handleChange}
+                            placeholder="Confirm Password"
+                            onKeyUp={handleChange}
+                            autoComplete="off"
+                            onBlur={handleValidations}
+                        />{' '}
+                        <div style={{height: '36px'}}>
+                            {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                        </div>
+                    </div>
+
+                    <div className="form-inputs">
+                        <label>Phone Number</label>
+                        <input
+                            type="number"
+                            name="phoneNumber"
+                            value={values.phoneNumber}
+                            onChange={handleChange}
+                            placeholder="Phone Number"
+                            onKeyUp={handleChange}
+                            autoComplete="off"
+                            onBlur={handleValidations}
+                        />{' '}
+                        <div style={{height: '36px'}}>
+                            {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+                        </div>
+                    </div>
+                    <button
+                        variant="primary"
+                        type="submit"
+                        disabled={
+                            Object.keys(errors).length !== 0 ||
+                            !values.email ||
+                            !values.password ||
+                            !values.confirmPassword ||
+                            !values.phoneNumber
+                        }
+                    >
+                        Submit
+                    </button>
+                </form>
+            )}
+        </div>
+    )
 }
