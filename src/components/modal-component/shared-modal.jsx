@@ -12,7 +12,9 @@ export const SharedModal = (props) => {
 
   return (
     <Modal className="shared-modal" show={props.show} onHide={handleCloseModal}>
-      <Modal.Header className= {checkLocation ? "modal-header modal-primary border-0": "modal-header modal-secondary border-0"}  closeButton >
+        <Modal.Header
+            className={checkLocation ? "modal-header modal-primary border-0" : "modal-header modal-secondary border-0"}
+            closeButton closeVariant='white'>
         <Modal.Title>{property}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body">You want to {property} as</Modal.Body>
