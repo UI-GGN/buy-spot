@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { BuyerLogin } from './BuyerLogin';
+import { BuyerLogin } from './buyer-login';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';

@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import './index.css'
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { BuyerRegistration } from './components/RegisterForm.component/BuyerRegistration'
-import { BuyerLogin } from './components/LoginForm.components/BuyerLogin'
-import { About } from './components/About'
-import { Home } from './components/Home'
-import { SellerLogin } from './components/LoginForm.components/SellerLogin'
-import { SellerRegistration } from './components/RegisterForm.component/SellerRegistration'
-import { Container, Nav, Navbar } from 'react-bootstrap'
-import { useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import React, { Component } from 'react';
+import './index.css';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BuyerRegistration } from './components/RegisterForm.component/BuyerRegistration';
+import { BuyerLogin } from './components/login-form/buyer-login';
+import { About } from './components/About';
+import { Home } from './components/Home';
+import { SellerLogin } from './components/login-form/seller-login';
+import { SellerRegistration } from './components/RegisterForm.component/SellerRegistration';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { useDispatch, useSelector } from 'react-redux'
 

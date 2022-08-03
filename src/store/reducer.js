@@ -1,16 +1,7 @@
 import { legacy_createStore as createStore } from 'redux'
 
 const intitialState = {
-  users: [
-    {
-      'id': '1',
-      'email': 'sree1@gmail.com',
-      'password': 'Qwerty345%',
-      'confirmPassword': 'Qwerty345%',
-      'phoneNumber': '1234567890',
-      'role': 'seller'
-    }
-  ],
+  users: [],
   loggedInUser: false,
 }
 
