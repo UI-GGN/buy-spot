@@ -1,0 +1,41 @@
+.shared-modal{
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-header{
+    opacity: 1;
+    background-color: #cb5656;
+    align-content: center;
+    text-align: center;
+    color: #fff !important;
+}
+
+.modal-body{
+    padding: 50px;
+    text-align: center;
+    font-size: x-large;
+    background-color: white;
+}
+
+.modal-footer{
+    background-color: white;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #dee2e6;
+
+}
+
+.modal-footer Button{
+    margin: 5px;
+    background-color: #cb5656;
+    color: white;
+}
+
+.modal-footer Button:hover{
+    border-color: #cb5656;
+    color: #cb5656;
+}
