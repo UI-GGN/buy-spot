@@ -129,6 +129,7 @@ export const SellerLogin = () => {
         <button
           variant="primary"
           type="submit"
+          data test-id={'submit'}
           disabled={
             Object.keys(errors).length !== 0 ||
             !fromInputValues.email ||

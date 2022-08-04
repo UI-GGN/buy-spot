@@ -114,7 +114,7 @@ export const BuyerLogin = () => {
             placeholder="Enter Password"
           />
           <div style={{ height: '30px' }}>
-            {errors.password && <p>{errors.password}</p>}
+            {touched.password && errors.password && <p>{errors.password}</p>}
             {isValid ? (
               <div className="hidden"></div>
             ) : (!touched.password &&

@@ -29,7 +29,6 @@ describe('Seller Login Components', () => {
             const passwordField = screen.getByPlaceholderText('Enter Password');
             expect(passwordField).toBeTruthy();
         })
-
     })
 
     describe('should validate input fields',() => {
