@@ -6,14 +6,18 @@ import { loginValidation } from './login-validation';
 
 export const SellerLogin = () => {
   const [fromInputValues, setInputValues] = useState({
-    email: null,
-    password: null,
-    role: 'seller',
+    email: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({});
 
   const [isValid, setValidUser] = useState(true);
+
+  const [touched, setTouchedFields] =useState ({
+    email: false,
+    password: false,
+  })
 
   const users = useSelector((state) => state.users);
 
@@ -22,14 +26,25 @@ export const SellerLogin = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setErrors(loginValidation(fromInputValues, e.target['name']))
     setInputValues({
       ...fromInputValues,
       [e.target.name]: e.target.value,
     })
   };
 
+  const handleValidation =(e) => {
+    setTouchedFields({
+      ...touched,
+      [e.target.name]: true,
+    })
+    setErrors(loginValidation(fromInputValues))
+  }
+
   const resetInputFields = () => {
+    setTouchedFields({
+      email:false,
+      password:false,
+    })
     setInputValues({ 
       email: '',
       password: '', 
@@ -40,19 +55,21 @@ export const SellerLogin = () => {
   const verifyExistingUser = () => {
     const payload = !!users.find(
       (user) =>
-        user.email === fromInputValues.email && user.password === fromInputValues.password && user.role === fromInputValues.role,
-    )
+        user.email === fromInputValues.email && user.password === fromInputValues.password && user.role === "seller"
+    );
 
     if (payload) {
       dispatch({
         type: 'LOGIN',
         payload: payload,
       })
+      setValidUser(true);
+
       navigate('/')
     } 
     
     else {
-      setValidUser(false)
+      setValidUser(false);
     }
   };
 
@@ -62,6 +79,8 @@ export const SellerLogin = () => {
     verifyExistingUser();
 
     resetInputFields();
+
+    
   };
 
   return (
@@ -77,11 +96,12 @@ export const SellerLogin = () => {
             name="email"
             value={fromInputValues.email}
             onChange={handleChange}
+            onBlur={handleValidation}
             placeholder="Enter email"
 
           />
           <div style={{ height: '30px' }}>
-            {errors.email && <p>{errors.email}</p>}
+            {touched.email && errors.email && <p>{errors.email}</p>}
           </div>
         </div>
 
@@ -93,13 +113,14 @@ export const SellerLogin = () => {
             name="password"
             value={fromInputValues.password}
             onChange={handleChange}
+            onBlur={handleValidation}
             placeholder="Enter Password"
           />
           <div style={{ height: '30px' }}>
-            {errors.password && <p>{errors.password}</p>}
+            {touched.password && errors.password && <p>{errors.password}</p>}
             {isValid ? (
               <div className="hidden"></div>
-            ) : (
+            ) : (!touched.password &&
               <p>Please enter valid credentials</p>
             )}
           </div>

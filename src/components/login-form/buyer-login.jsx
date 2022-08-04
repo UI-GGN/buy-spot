@@ -3,50 +3,72 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginValidation } from './login-validation';
 
+
 export const BuyerLogin = () => {
   const [fromInputValues, setInputValues] = useState({
-    email: null,
-    password: null,
-    role: 'buyer',
+    email: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({});
+
   const [isValid, setValidUser] = useState(true);
 
+  const [touched, setTouchedFields] =useState ({
+    email: false,
+    password: false,
+  })
+  
   const users = useSelector((state) => state.users);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setErrors(loginValidation(fromInputValues, e.target['name']));
     setInputValues({
       ...fromInputValues,
       [e.target.name]: e.target.value,
     });
   };
 
+  const handleValidation =(e) => {
+    setTouchedFields({
+      ...touched,
+      [e.target.name]: true,
+    })
+    setErrors(loginValidation(fromInputValues))
+  }
+  
   const resetInputFields = () => {
+      setTouchedFields({
+      email:false,
+      password:false,
+    })
     setInputValues({ 
       email: '',
       password: '', 
     })
   };
 
+
   const verifyExistingUser = () => {
     const payload = !!users.find(
       (user) =>
-        user.email === fromInputValues.email && user.password === fromInputValues.password && user.role === fromInputValues.role,
+        user.email === fromInputValues.email && user.password === fromInputValues.password && user.role ===  "buyer"
     );
 
     if (payload) {
       dispatch({
         type: 'LOGIN',
         payload: payload,
-        role: 'buyer'
       })
+    setValidUser(true);
+
       navigate('/')
-    } else {
+    } 
+    
+    else {
       setValidUser(false)
     }
   };
@@ -57,7 +79,7 @@ export const BuyerLogin = () => {
     verifyExistingUser();
 
     resetInputFields();
-  }
+  };
 
   return (
     <div className="login-form">
@@ -72,11 +94,11 @@ export const BuyerLogin = () => {
             name="email"
             value={fromInputValues.email}
             onChange={handleChange}
+            onBlur={handleValidation}
             placeholder="Enter email"
-            onKeyUp={handleChange}
           />
           <div style={{ height: '30px' }}>
-            {errors.email && <p>{errors.email}</p>}
+            {touched.email && errors.email && <p>{errors.email}</p>}
           </div>
         </div>
 
@@ -88,14 +110,14 @@ export const BuyerLogin = () => {
             name="password"
             value={fromInputValues.password}
             onChange={handleChange}
+            onBlur={handleValidation}
             placeholder="Enter Password"
-            onKeyUp={handleChange}
           />
           <div style={{ height: '30px' }}>
             {errors.password && <p>{errors.password}</p>}
             {isValid ? (
               <div className="hidden"></div>
-            ) : (
+            ) : (!touched.password &&
               <p>Please enter valid credentials</p>
             )}
           </div>
