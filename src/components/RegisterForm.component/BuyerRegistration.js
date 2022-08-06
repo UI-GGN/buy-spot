@@ -6,22 +6,50 @@ import './Form.css'
 import { Link } from 'react-router-dom'
 
 export const BuyerRegistration = () => {
-  const [values, setValues] = useState({
-    email: undefined,
-    password: undefined,
-    confirmPassword: undefined,
-    phoneNumber: undefined,
+  const [userDetails, setUserDetails] = useState({
+    email: null,
+    password: null,
+    confirmPassword: null,
+    phoneNumber: null,
     role: "buyer"
   })
 
   const [errors, setErrors] = useState({})
 
+  const [touched, setTouchedFields] = useState({
+    email: false,
+    password: false,
+    confirmPassword: false,
+    phoneNumber: false
+  })
+
+  const resetInputFields = () => {
+    setTouchedFields({
+      email: false,
+      password: false,
+      confirmPassword: false,
+      phoneNumber: false
+    })
+    setUserDetails({
+      email: null,
+      password: null,
+      confirmPassword: null,
+      phoneNumber: null
+    })
+  };
+
+
   const handleChange = (e) => {
-    setErrors(validation(values, e.target['name']))
-    setValues({
-      ...values,
+    setUserDetails({
+      ...userDetails,
       [e.target.name]: e.target.value,
     })
+  }
+  const handleValidations = (e) => {
+    setTouchedFields({
+      ...touched, [e.target.name]: true,
+    })
+    setErrors(validation(userDetails, e.target['name']))
   }
 
   const dispatch = useDispatch()
@@ -35,13 +63,15 @@ export const BuyerRegistration = () => {
       type: 'REGISTER',
       payload: {
         id: new Date().getTime(),
-        email: values.email,
-        password: values.password,
-        confirmPassword: values.confirmPassword,
-        phoneNumber: values.phoneNumber,
+        email: userDetails.email,
+        password: userDetails.password,
+        confirmPassword: userDetails.confirmPassword,
+        phoneNumber: userDetails.phoneNumber,
+        role:"buyer"
       },
     })
     setIsSubmit(true)
+    resetInputFields();
   }
 
   return (
@@ -66,13 +96,15 @@ export const BuyerRegistration = () => {
             <input
               type="email"
               name="email"
-              value={values.email}
+              value={userDetails.email}
               onChange={handleChange}
               placeholder="Enter email"
               onKeyUp={handleChange}
+              onBlur={handleValidations}
+
             />
             <div style={{ height: '36px' }}>
-              {errors.email && <p>{errors.email}</p>}
+              {touched.email && errors.email && <p>{errors.email}</p>}
             </div>
           </div>
 
@@ -81,13 +113,15 @@ export const BuyerRegistration = () => {
             <input
               type="password"
               name="password"
-              value={values.password}
+              value={userDetails.password}
               onChange={handleChange}
               placeholder="Enter Password"
               onKeyUp={handleChange}
+              onBlur={handleValidations}
+
             />{' '}
             <div style={{ height: '36px' }}>
-              {errors.password && <p>{errors.password}</p>}
+              {touched.password && errors.password && <p>{errors.password}</p>}
             </div>
           </div>
 
@@ -96,13 +130,14 @@ export const BuyerRegistration = () => {
             <input
               type="password"
               name="confirmPassword"
-              value={values.confirmPassword}
+              value={userDetails.confirmPassword}
               onChange={handleChange}
               placeholder="Confirm Password"
               onKeyUp={handleChange}
+              onBlur={handleValidations}
             />{' '}
             <div style={{ height: '36px' }}>
-              {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+              {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
             </div>
           </div>
 
@@ -111,13 +146,14 @@ export const BuyerRegistration = () => {
             <input
               type="number"
               name="phoneNumber"
-              value={values.phoneNumber}
+              value={userDetails.phoneNumber}
               onChange={handleChange}
               placeholder="Phone Number"
               onKeyUp={handleChange}
+              onBlur={handleValidations}
             />{' '}
             <div style={{ height: '36px' }}>
-              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+              {touched.phoneNumber && errors.phoneNumber && <p>{errors.phoneNumber}</p>}
             </div>
           </div>
 
@@ -126,10 +162,10 @@ export const BuyerRegistration = () => {
             type="submit"
             disabled={
               Object.keys(errors).length !== 0 ||
-              !values.email ||
-              !values.password ||
-              !values.confirmPassword ||
-              !values.phoneNumber
+              !userDetails.email ||
+              !userDetails.password ||
+              !userDetails.confirmPassword ||
+              !userDetails.phoneNumber
             }
           >
             Submit

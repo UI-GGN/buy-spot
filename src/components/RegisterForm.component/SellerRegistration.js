@@ -13,8 +13,30 @@ export const SellerRegistration = () => {
         phoneNumber: null,
         role: "seller"
     })
-
     const [errors, setErrors] = useState({})
+
+    const [touched, setTouchedFields] = useState({
+        email: false,
+        password: false,
+        confirmPassword: false,
+        phoneNumber: false
+    })
+
+    const resetInputFields = () => {
+        setTouchedFields({
+            email: false,
+            password: false,
+            confirmPassword: false,
+            phoneNumber: false
+        })
+        setUserDetails({
+            email: null,
+            password: null,
+            confirmPassword: null,
+            phoneNumber: null
+        })
+    };
+
 
     const handleChange = (e) => {
         setUserDetails({
@@ -23,6 +45,9 @@ export const SellerRegistration = () => {
         })
     }
     const handleValidations = (e) => {
+        setTouchedFields({
+            ...touched, [e.target.name]: true,
+        })
         setErrors(validation(userDetails, e.target['name']))
     }
 
@@ -46,6 +71,7 @@ export const SellerRegistration = () => {
             },
         })
         setIsSubmit(true)
+        resetInputFields();
     }
     return (
         <div className="register-form">
@@ -77,7 +103,7 @@ export const SellerRegistration = () => {
                             onBlur={handleValidations}
                         />
                         <div style={{height: '36px'}}>
-                            {errors.email && <p>{errors.email}</p>}
+                            {touched.email && errors.email && <p>{errors.email}</p>}
                         </div>
                     </div>
 
@@ -94,7 +120,8 @@ export const SellerRegistration = () => {
                             onBlur={handleValidations}
                         />{' '}
                         <div style={{height: '36px'}}>
-                            {errors.password && <p>{errors.password}</p>}
+
+                            {touched.password && errors.password && <p>{errors.password}</p>}
                         </div>
                     </div>
 
@@ -111,7 +138,7 @@ export const SellerRegistration = () => {
                             onBlur={handleValidations}
                         />{' '}
                         <div style={{height: '36px'}}>
-                            {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                            {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                         </div>
                     </div>
 
@@ -128,7 +155,7 @@ export const SellerRegistration = () => {
                             onBlur={handleValidations}
                         />{' '}
                         <div style={{height: '36px'}}>
-                            {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+                            {touched.phoneNumber && errors.phoneNumber && <p>{errors.phoneNumber}</p>}
                         </div>
                     </div>
                     <button
