@@ -1,6 +1,6 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import {Provider} from "react-redux";
-import {SellerRegistration} from "./SellerRegistration";
+import {SellerRegistration} from "./seller-registration";
 import configureStore from "redux-mock-store";
 import userEvent from "@testing-library/user-event";
 

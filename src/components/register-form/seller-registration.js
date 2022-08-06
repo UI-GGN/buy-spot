@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import './Form.css'
-import validation from "./Validation";
+import './form.css'
+import validation from "./validation";
 import {useDispatch} from "react-redux";
 
 import {Link} from "react-router-dom";
