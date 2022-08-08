@@ -1,47 +1,38 @@
 .shared-modal {
     background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
 }
 
-.modal-header {
+.shared-modal-design{
     background-color: white;
+}
+
+.modal-content{
+    width: 70%;
 }
 
 .modal-body {
-    background-color: white;
-    display: flex;
-}
-
-.modal-body .modal-body-image {
-    flex-grow: 0.4;
-    flex-basis: 0;
-    padding: 40px 10px 10px;
-}
-
-.modal-body .modal-body-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 0.6;
-    flex-basis: 0;
-    align-items: center;
+    padding: 2px 20px 10px 20px;
 }
 
-.modal-body .modal-button-secondary {
-    margin: 5px;
+.modal-footer{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-footer .modal-button-secondary {
     background-color: #ff2020;
     color: white;
     border-color: #ff2020;
-    min-width: 50%;
+    width: 45%;
 }
 
-.modal-body .modal-button-primary {
-    margin: 5px;
+.modal-footer .modal-button-primary {
     border-color: #ff2020;
     color: #ff2020;
-    min-width: 50%;
+    width: 45%;
 }
-
-.modal-footer {
-    background-color: white;
-}
-
 
