@@ -3,17 +3,17 @@ import './index.css'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { BuyerRegistration } from './components/RegisterForm.component/BuyerRegistration'
-import { BuyerLogin } from './components/LoginForm.components/BuyerLogin'
+import { BuyerRegistration } from './components/register-form/buyer-registration'
+import { BuyerLogin } from './components/login-form/buyer-login'
 import { About } from './components/About'
 import { Home } from './components/Home'
-import { SellerLogin } from './components/LoginForm.components/SellerLogin'
-import { SellerRegistration } from './components/RegisterForm.component/SellerRegistration'
+import { SellerLogin } from './components/login-form/seller-login'
+import { SellerRegistration } from './components/register-form/seller-registration'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import {SharedModal} from './components/modal-component/shared-modal';
+
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductDescription } from './components/product-list-component/product-description/product-description'
 
@@ -21,10 +21,8 @@ function App() {
   const [showRegister, setShowRegister] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
 
-  const handleCloseRegister = () => setShowRegister(false)
   const handleShowRegister = () => setShowRegister(true)
 
-  const handleCloseLogin = () => setShowLogin(false)
   const handleShowLogin = () => setShowLogin(true)
   const dispatch = useDispatch()
 
@@ -92,63 +90,10 @@ function App() {
                     </Nav.Link>
                   </div>
                 )}
-                <Modal
-                  className="login-modal"
-                  show={showLogin}
-                  onHide={handleCloseLogin}
-                >
-                  <Modal.Header class=" border-0" closeButton>
-                    <Modal.Title>Login</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>You want to Login as</Modal.Body>
-                  <Modal.Footer class="modal-footer border-0">
-                    <Button variant="light" onClick={handleCloseLogin}>
-                      <Link
-                        style={{ textDecoration: 'none', color: 'black' }}
-                        to="/buyer-login"
-                      >
-                        Buyer
-                      </Link>
-                    </Button>
-                    <Button variant="light" onClick={handleCloseLogin}>
-                      <Link
-                        style={{ textDecoration: 'none', color: 'black' }}
-                        to="/seller-login"
-                      >
-                        Seller
-                      </Link>
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
 
-                <Modal
-                  className="register-modal"
-                  show={showRegister}
-                  onHide={handleCloseRegister}
-                >
-                  <Modal.Header class="border-0" closeButton>
-                    <Modal.Title>Register</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>You want to Register as</Modal.Body>
-                  <Modal.Footer class="modal-footer border-0">
-                    <Button variant="light" onClick={handleCloseRegister}>
-                      <Link
-                        style={{ textDecoration: 'none', color: 'black' }}
-                        to="/buyer-registration"
-                      >
-                        Buyer
-                      </Link>
-                    </Button>
-                    <Button variant="light" onClick={handleCloseRegister}>
-                      <Link
-                        style={{ textDecoration: 'none', color: 'black' }}
-                        to="/seller-registration"
-                      >
-                        Seller
-                      </Link>
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+                <SharedModal show={showLogin} setShow={setShowLogin} property={"Login"}/>
+                <SharedModal show={showRegister} setShow={setShowRegister} property={"Register"}/>
+                
               </Nav>
             </Navbar.Collapse>
           </Container>

@@ -1,0 +1,38 @@
+.shared-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+}
+
+.shared-modal-design{
+    background-color: white;
+}
+
+.modal-content{
+    width: 70%;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 20px 10px 20px;
+}
+
+.modal-footer{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-footer .modal-button-secondary {
+    background-color: #ff2020;
+    color: white;
+    border-color: #ff2020;
+    width: 45%;
+}
+
+.modal-footer .modal-button-primary {
+    border-color: #ff2020;
+    color: #ff2020;
+    width: 45%;
+}
+
