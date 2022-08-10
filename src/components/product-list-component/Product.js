@@ -12,11 +12,13 @@ const Product = (props) => {
   const showProductPage = useSelector((state) => {
     return state.loggedInUser
   })
+  // console.log('id=======', props.id)
+  // console.log('to url=====', 'product/' + props.id)
 
   return (
     <div className="col-md-4 custom-product" data-testid={'product'}>
       {showProductPage ? (
-        <Link to="/product/:id" className="product-page-link">
+        <Link to={'product/' + props.id} className="product-page-link">
           <div
             className="col-md-4 custom-product"
             data-testid={'product'}

@@ -3,14 +3,16 @@ import { useState, useEffect } from 'react';
 import Product from '../Product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from 'react-router-dom';
 
 import './product-description.css';
 
 export const ProductDescription = (props) => {
 
     const [productdetails, setProductDetails] = useState([]);
+    const { productId } = useParams();
     const getProductdetails = async () => {
-        const response = await fetch('https://fakestoreapi.com/products/2');
+        const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
         setProductDetails(await response.json())
     }
 
@@ -20,10 +22,10 @@ export const ProductDescription = (props) => {
 
     return (
         <main className="container">
-            
+
             {/* <!-- Left Column /  Image --> */}
             <div className="left-column">
-                <img src={productdetails.images} alt="products" className="img" />
+                <img src={productdetails.image} alt="products" className="img" />
             </div>
 
             {/* <!-- Right Column --> */}
@@ -32,7 +34,7 @@ export const ProductDescription = (props) => {
                 {/* <!-- Product Description --> */}
                 <div className="product-label">
                     <div className="category">
-                       <span><h1>{productdetails.category}</h1></span> 
+                        <span><h1>{productdetails.category}</h1></span>
                     </div>
                     <div className="title">
                         <h2>{productdetails.title}</h2>
@@ -40,7 +42,11 @@ export const ProductDescription = (props) => {
                 </div>
 
                 <div className="product-description">
-                    <p>{productdetails.description}</p>
+                    <span> <p>{productdetails.description}</p></span>
+                </div>
+
+                <div className="product-rating">
+                    <span> </span>
                 </div>
 
                 {/* <!-- Product Pricing --> */}

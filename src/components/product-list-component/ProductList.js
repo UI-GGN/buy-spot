@@ -26,7 +26,7 @@ const ProductList = () => {
                     {
                         productdata.slice(1, 16).map((curProduct) => {
                             return (
-                                <Product category={curProduct.category} image={curProduct.image} price={curProduct.price} key={curProduct.id} />
+                                <Product id={curProduct.id} category={curProduct.category} image={curProduct.image} price={curProduct.price} key={curProduct.id} />
                             )
                         })
                     }
