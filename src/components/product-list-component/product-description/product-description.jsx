@@ -1,64 +1,85 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import Product from '../Product';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIndianRupee } from '@fortawesome/free-solid-svg-icons'
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faIndianRupee } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import './product-description.css';
+import "./product-description.css";
 
 export const ProductDescription = (props) => {
+  const [productdetails, setProductDetails] = useState([]);
+  const { productId } = useParams();
+  const getProductdetails = async () => {
+    const response = await fetch(
+      `https://fakestoreapi.com/products/${productId}`
+    );
+    setProductDetails(await response.json());
+  };
 
-    const [productdetails, setProductDetails] = useState([]);
-    const { productId } = useParams();
-    const getProductdetails = async () => {
-        const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
-        setProductDetails(await response.json())
-    }
+  useEffect(() => {
+    getProductdetails();
+  });
 
-    useEffect(() => {
-        getProductdetails();
-    }, []);
+  return (
+    <main className="description-container">
+      {/* <!-- Left Column /  Image --> */}
+      <div className="left-column">
+        <img
+          src={productdetails.image}
+          alt="products"
+          className="img"
+          width="600px"
+          height="600px"
+        />
+      </div>
 
-    return (
-        <main className="container">
+      {/* <!-- Right Column --> */}
+      <div className="right-column">
+        {/* <!-- Product Description Top --> */}
 
-            {/* <!-- Left Column /  Image --> */}
-            <div className="left-column">
-                <img src={productdetails.image} alt="products" className="img" />
-            </div>
+        <div className="product-label">
+          <div className="title">
+            <h2>{productdetails.title}</h2>
+          </div>
 
-            {/* <!-- Right Column --> */}
-            <div className="right-column">
+          {/* <!-- Product Rating--> */}
+          <div className="product-rating">
+            <h6>
+              Rating : {productdetails.rating["rate"]} 
+               <span>( {productdetails.rating["count"]} customer reviews )</span> 
+            </h6>
+          </div>
 
-                {/* <!-- Product Description --> */}
-                <div className="product-label">
-                    <div className="category">
-                        <span><h1>{productdetails.category}</h1></span>
-                    </div>
-                    <div className="title">
-                        <h2>{productdetails.title}</h2>
-                    </div>
-                </div>
+          {/* <!-- Product Pricing --> */}
 
-                <div className="product-description">
-                    <span> <p>{productdetails.description}</p></span>
-                </div>
+          <div className="product-price">
+            <span>
+              <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
+              {productdetails.price}
+            </span>
+          </div>
+        </div>
 
-                <div className="product-rating">
-                    <span> </span>
-                </div>
+        {/* <!-- Product Describe --> */}
 
-                {/* <!-- Product Pricing --> */}
-                <div className="price">
-                    <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
-                    {productdetails.price}
-                </div>
-                <a href="#" class="cart-btn">Add to cart</a>
-            </div>
-        </main >
-    )
-}
+        <div className="product-description">
+          <p>Category: {productdetails.category}</p>
+          <p> {productdetails.description}</p>
+        </div>
 
-
-
+        <div>
+          <a href="/addtocart" class="cart-btn">
+            <AiOutlineShoppingCart />
+            ADD TO CART
+          </a>
+          <a href="/wishlist" class="wishlist-btn">
+            <AiOutlineHeart />
+            WISHLIST
+          </a>
+        </div>
+      </div>
+    </main>
+  );
+};

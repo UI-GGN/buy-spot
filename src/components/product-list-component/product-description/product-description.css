@@ -1,27 +1,43 @@
-.container {
+.description-container {
   max-width: 1200px;
-  margin: 0 auto;
+  max-height: 1000px;
   padding: 15px;
+  margin-top: 100px;
+  margin-left: 200px;
+  margin-right: 200px;
   display: flex;
+  background-color: #ffffff;
 }
 
 /* Columns */
 .left-column {
   width: 65%;
+  max-width: 600px;
   position: relative;
+  margin-top: 0%;
+  padding-bottom: 5%;
+  background-color: #959494;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .right-column {
   width: 35%;
-  margin-top: 60px;
+  max-width: 600px;
+  margin-top: 30px;
+  margin-left: 20px;
+  padding-bottom: 3%;
+
 }
 
 /* Left Column */
 .left-column img {
-  width: 100%;
-  left: 0;
-  top: 0;
-  
+  margin-top: 10%;
+  margin-bottom: 2%;
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: contain;
 }
 
 .left-column img.active {
@@ -42,8 +58,10 @@
 
 .title {
   border-bottom: 1px solid #E1E8EE;
-  color: #5d0101;
-  margin-bottom: 20px;
+  color: #040404;
+  margin-top:0%;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 
@@ -52,13 +70,32 @@
   font-size: 52px;
   color: #43484D;
   letter-spacing: -2px;
+  text-align: left;
+
 }
 
 .product-description p {
   font-size: 16px;
   font-weight: 300;
-  color: #86939E;
+  color: #040404;
   line-height: 24px;
+  text-align: left;
+}
+
+/* Product Rating */
+.product-rating {
+  font-size: 16px;
+  color: #040404;
+  text-align: left;
+}
+
+.product-rating span {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  font-style: italic;
+  padding-left: 1%;
+  color: #43484D;
 }
 
 /* Product Price */
@@ -66,28 +103,45 @@
   display: flex;
   align-items: center;
 }
- 
+
 .product-price span {
   font-size: 26px;
   font-weight: 300;
-  color: #43474D;
+  color: #c42f2d;
+  font-weight: bold;
   margin-right: 20px;
 }
- 
+
 
 .cart-btn {
   display: inline-block;
-  background-color: #7DC855;
-  border-radius: 6px;
+  background-color: #080908;
   font-size: 16px;
   color: #FFFFFF;
   text-decoration: none;
   padding: 12px 30px;
+  font-weight: bold;
   transition: all .5s;
 }
 
 .cart-btn:hover {
   background-color: #64af3d;
+}
+
+.wishlist-btn {
+  display: inline-block;
+  background-color: #090808;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 12px 30px;
+  margin-left: 3%;
+  transition: all .5s;
+}
+
+.wishlist-btn:hover {
+  background-color: #ea70d1;
 }
 
 /* Responsive */
