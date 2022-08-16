@@ -5,10 +5,10 @@ import { faIndianRupee } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
 import "./product-description.css";
+import Rating from "./Rating";
 
-export const ProductDescription = (props) => {
+export const ProductDescription = () => {
   const [productdetails, setProductDetails] = useState([]);
   const { productId } = useParams();
   const getProductdetails = async () => {
@@ -20,7 +20,7 @@ export const ProductDescription = (props) => {
 
   useEffect(() => {
     getProductdetails();
-  });
+  }, []);
 
   return (
     <main className="description-container">
@@ -47,13 +47,13 @@ export const ProductDescription = (props) => {
           {/* <!-- Product Rating--> */}
           <div className="product-rating">
             <h6>
-              Rating : {productdetails.rating["rate"]} 
-               <span>( {productdetails.rating["count"]} customer reviews )</span> 
+              Rating :<Rating maxRating={productdetails?.rating?.rate} />
+              {<span> {productdetails?.rating?.count} customer reviews </span>}
             </h6>
           </div>
-
+          {/*  */}
           {/* <!-- Product Pricing --> */}
-
+          {/* {productdetails.rating["rate"]} */}
           <div className="product-price">
             <span>
               <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
