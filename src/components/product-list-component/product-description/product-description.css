@@ -140,6 +140,10 @@
   transition: all .5s;
 }
 
+.descruppee {
+  font-size: 21px;
+}
+
 .wishlist-btn:hover {
   background-color: #ea70d1;
 }

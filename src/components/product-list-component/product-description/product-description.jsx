@@ -53,10 +53,9 @@ export const ProductDescription = () => {
           </div>
           {/*  */}
           {/* <!-- Product Pricing --> */}
-          {/* {productdetails.rating["rate"]} */}
           <div className="product-price">
             <span>
-              <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
+              <FontAwesomeIcon icon={faIndianRupee} className="descruppee" />
               {productdetails.price}
             </span>
           </div>
