@@ -32,6 +32,22 @@
         "prettier": "prettier src -check",
         "lint-staged": "lint-staged --config lint-staged.js"
     },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/**/*.js",
+            "!src/index.js",
+            "!src/hooks/*.js",
+            "!src/context/*.js"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 50,
+                "functions": 40,
+                "lines": 45,
+                "statements": 45
+            }
+        }
+    },
     "eslintConfig": {
         "extends": [
             "react-app",
