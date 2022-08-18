@@ -7,14 +7,17 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./product-description.css";
 import Rating from "./Rating";
-
+import Footer from '../../footer-component/Footer';
 export const ProductDescription = () => {
   const [productdetails, setProductDetails] = useState([]);
+
   const { productId } = useParams();
+
   const getProductdetails = async () => {
     const response = await fetch(
       `https://fakestoreapi.com/products/${productId}`
     );
+
     setProductDetails(await response.json());
   };
 
@@ -23,6 +26,7 @@ export const ProductDescription = () => {
   }, []);
 
   return (
+    <>
     <main className="description-container">
       {/* <!-- Left Column /  Image --> */}
       <div className="left-column">
@@ -80,5 +84,7 @@ export const ProductDescription = () => {
         </div>
       </div>
     </main>
+    <Footer/>
+    </>
   );
 };

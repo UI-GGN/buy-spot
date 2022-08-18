@@ -14,6 +14,7 @@ import { useState } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import {SharedModal} from './components/modal-component/shared-modal';
 
+
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductDescription } from './components/product-list-component/product-description/product-description'
 
@@ -117,6 +118,7 @@ function App() {
         </div>
       </div>
     </BrowserRouter>
+
   )
 }
 
