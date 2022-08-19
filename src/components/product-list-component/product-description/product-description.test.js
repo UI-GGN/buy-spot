@@ -1,3 +1,4 @@
+import React from 'react'
 import { ProductDescription } from "./product-description";
 import { render, screen } from '@testing-library/react';
 

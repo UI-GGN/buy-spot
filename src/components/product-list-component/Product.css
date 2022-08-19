@@ -1,9 +1,17 @@
 .custom-product {
+<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   background-color: transparent !important;
   border: 0px !important;
   margin-top: 25px !important;
+=======
+    display: flex;
+    flex-direction: column;
+    background-color: transparent ;
+    border: 0px ;
+    margin-top: 25px;
+>>>>>>> master
 }
 
 .category {
