@@ -28,7 +28,9 @@ export const ProductDescription = () => {
   return (
     <>
     <main className="description-container">
+
       {/* <!-- Left Column /  Image --> */}
+
       <div className="left-column">
         <img
           src={productdetails.image}
@@ -41,8 +43,8 @@ export const ProductDescription = () => {
 
       {/* <!-- Right Column --> */}
       <div className="right-column">
-        {/* <!-- Product Description Top --> */}
 
+        {/* <!-- Product Description Top --> */}
         <div className="product-label">
           <div className="title">
             <h2>{productdetails.title}</h2>
@@ -55,7 +57,7 @@ export const ProductDescription = () => {
               {<span> {productdetails?.rating?.count} customer reviews </span>}
             </h6>
           </div>
-          {/*  */}
+         
           {/* <!-- Product Pricing --> */}
           <div className="product-price">
             <span>
@@ -66,7 +68,6 @@ export const ProductDescription = () => {
         </div>
 
         {/* <!-- Product Describe --> */}
-
         <div className="product-description">
           <p>Category: {productdetails.category}</p>
           <p> {productdetails.description}</p>

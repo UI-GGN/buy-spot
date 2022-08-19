@@ -3,7 +3,6 @@ import Carousel from "react-material-ui-carousel";
 
 const BannerSlider = () => {
   const images = ["assets/bannerimg1.jpeg", "assets/bannerimg2.jpeg"];
-
   return (
     <Carousel
       interval={2000}
