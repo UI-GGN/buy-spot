@@ -32,3 +32,11 @@ jobs:
           name: Static Build folder
           path: |
             ./build
+      - name: npm ci
+        run: npm ci
+      - name: test
+        run: npm run test -- --coverage --watchAll=false
+      - name: format
+        run: npm run prettier
+      - name: lint
+        run: npm run lint
