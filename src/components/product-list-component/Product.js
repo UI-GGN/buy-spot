@@ -1,30 +1,46 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types'
 
-const Product = (props) => {
+const Product = props => {
+    const image = props.image
+    const category = props.category
+    const price = props.price
 
-  const showPrice = useSelector((state) => {
-    return state.loggedInUser
-  })
-  return (
-    <div className="col-md-4 custom-product" data-testid={'product'}>
-      <img className="img" src={props.image} alt="products" />
-      <br className="img-gap"></br>
-      <div className="product-label">
-        <div className="category">{props.category}</div>
+    const showPrice = useSelector(state => {
+        return state.loggedInUser
+    })
 
+    Product.propTypes = {
+        image: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
+        onClick: PropTypes.func.isRequired,
+    }
 
-        {showPrice ? 
-          <div className="price">
-            <FontAwesomeIcon icon={faIndianRupee} className="ruppee" />
-            {props.price}
-          </div> : <div></div>}
+    return (
+        <div className="col-md-4 custom-product" data-testid={'product'}>
+            <img className="img" src={image} alt="products" />
+            <br className="img-gap"></br>
+            <div className="product-label">
+                <div className="category">{category}</div>
 
-      </div>
-    </div>
-  )
+                {showPrice ? (
+                    <div className="price">
+                        <FontAwesomeIcon
+                            icon={faIndianRupee}
+                            className="ruppee"
+                        />
+                        {price}
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+            </div>
+        </div>
+    )
 }
 
-export default Product;
+export default Product
