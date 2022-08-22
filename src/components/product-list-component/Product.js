@@ -16,7 +16,7 @@ const Product = props => {
 
   Product.propTypes = {
       image: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       onClick: PropTypes.func.isRequired,
   }

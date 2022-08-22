@@ -53,7 +53,8 @@ export const ProductDescription = () => {
           {/* <!-- Product Rating--> */}
           <div className="product-rating">
             <h6>
-              Rating :<Rating maxRating={productdetails?.rating?.rate} />
+            {/* productdetails?.rating?.rate */}
+              Rating :<Rating maxRating={4} />
               {<span> {productdetails?.rating?.count} customer reviews </span>}
             </h6>
           </div>
