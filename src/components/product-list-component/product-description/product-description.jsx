@@ -74,11 +74,11 @@ export const ProductDescription = () => {
         </div>
 
         <div>
-          <a href="/addtocart" class="cart-btn">
+          <a href="/addtocart" className="cart-btn">
             <AiOutlineShoppingCart />
             ADD TO CART
           </a>
-          <a href="/wishlist" class="wishlist-btn">
+          <a href="/wishlist" className="wishlist-btn">
             <AiOutlineHeart />
             WISHLIST
           </a>

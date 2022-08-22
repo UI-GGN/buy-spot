@@ -26,10 +26,10 @@ const ProductList = () => {
                     {
                         productdata.slice(1, 16).map((curProduct) => {
                             return (
-                                <Product id={curProduct.id} category={curProduct.category} image={curProduct.image} price={curProduct.price} key={curProduct.id} />
+                               <Product key={curProduct.id} {...{curProduct}}/>
+                                                       )}
                             )
-                        })
-                    }
+                        }
                 </div>
             </div>
         </div>
