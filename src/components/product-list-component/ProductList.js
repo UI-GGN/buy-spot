@@ -22,7 +22,7 @@ const ProductList = () => {
                 <div className="product-inner-container">
                     {productdata.slice(1, 16).map(curProduct => {
                         return (
-                            <Product key={curProduct.id} product={curProduct} />
+                            <Product key={curProduct.id} product={curProduct}  />
                         )
                     })}
                 </div>
