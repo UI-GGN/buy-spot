@@ -13,7 +13,7 @@ const ProductList = () => {
 
     useEffect(() => {
         getProducts()
-    }, [])
+    }, []) 
 
     return (
         <div className="product-list" data-testid="product-list">
@@ -22,7 +22,7 @@ const ProductList = () => {
                 <div className="product-inner-container">
                     {productdata.slice(1, 16).map(curProduct => {
                         return (
-                            <Product key={curProduct.id} {...{ curProduct }} />
+                            <Product key={curProduct.id} product={curProduct} />
                         )
                     })}
                 </div>

@@ -4,28 +4,20 @@ import  PropTypes  from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons'
 import './Product.css'
+import { Link } from 'react-router-dom'
 
-const Product = props => {
-  const image = props.image
-  const category = props.category
-  const price = props.price
-
+const Product = product => {
   const showPrice = useSelector(state => {
       return state.loggedInUser
   })
-
-  Product.propTypes = {
-      image: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      onClick: PropTypes.func.isRequired,
-  }
+  console.log(product);
   return (
     <div className="col-md-4 custom-product" data-testid={'product'}>
-        <img className="img" src={image} alt="products" />
+      <Link to={'product/' + product.product.id} className="product-page-link">
+        <img className="img" src={product.product.image} alt="products" />
         <br className="img-gap"></br>
         <div className="product-label">
-            <div className="category">{category}</div>
+            <div className="category">{product.product.category}</div>
 
             {showPrice ? (
                 <div className="price">
@@ -33,14 +25,20 @@ const Product = props => {
                         icon={faIndianRupee}
                         className="ruppee"
                     />
-                    {price}
+                    {product.product.price}
                 </div>
             ) : (
                 <div></div>
             )}
         </div>
+        </Link>
     </div>
 )
+
+}
+Product.propTypes = {
+  product:PropTypes.object.isRequired ,
+  // onClick: PropTypes.func.isRequired
 }
 
 export default Product
