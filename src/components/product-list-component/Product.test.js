@@ -15,7 +15,7 @@ const store = mockStore(mockState)
 describe('Product', () => {
     it('should render Product component', async () => {
         render(
-            <Provider store={store}>
+            <Provider store={store} >
                 <Product />
             </Provider>,
         )
