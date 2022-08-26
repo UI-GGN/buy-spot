@@ -1,45 +1,50 @@
 .custom-product {
     display: flex;
     flex-direction: column;
-    background-color: transparent !important;
-    border: 0px !important;
-    margin-top: 25px !important;
+    background-color: transparent ;
+    border: 0px ;
+    margin-top: 25px;
 }
 
 .category {
-    font-family: 'Jost', sans-serif;
-    font-weight: 500;
-    font-size: 20px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .price {
-    font-family: 'Jost', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: #74706b;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #74706b;
 }
 
 .price:hover {
-    color: black;
+  color: black;
 }
 
 .ruppee {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .img {
-    display: block;
-    margin: 0 auto;
-    align-items: center;
-    width: auto;
-    height: auto;
-    max-width: 270px;
-    max-height: 200px;
-    background-color: white;
-    object-fit: contain;
-    aspect-ratio: 3/2;
+  display: block;
+  margin: 0 auto;
+  align-items: center;
+  width: auto;
+  height: auto;
+  max-width: 270px;
+  max-height: 200px;
+  background-color: white;
+  object-fit: contain;
+  aspect-ratio: 3/2;
 }
 
 .img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.product-page-link {
+  text-decoration: none;
+  color: black;
 }
