@@ -31,6 +31,9 @@ export const ProductDescription = () => {
         setIsShown(true);
     };
 
+   
+
+
     return (
         <>
             <main className="description-container">
@@ -87,6 +90,7 @@ export const ProductDescription = () => {
                             <AiOutlineHeart />
                             WISHLIST
                         </button>
+                       
                         {isShown && (
                             <div className="add-to-cart">
                                 <h2>Product added to Cart</h2>

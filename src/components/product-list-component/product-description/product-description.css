@@ -145,9 +145,9 @@
 .add-to-cart {
   position: absolute;
   top: 700px;
-  right: 700px;
-  left: 700px;
-  width: 600px;
+  right: 500px;
+  left: 500px;
+  width: 500px;
   height: 50px;
   border: 3px solid #2e8fa7;
 }
