@@ -3,6 +3,8 @@ import { legacy_createStore as createStore } from 'redux'
 const intitialState = {
   users: [],
   loggedInUser: false,
+  cartdetails:[],
+  count: 0
 }
 
 const reducer = (state = intitialState, action) => {
@@ -23,6 +25,19 @@ const reducer = (state = intitialState, action) => {
       return {
         ...state,
         loggedInUser: action.payload,
+      }
+
+    case 'ADD_TO_CART':
+      return {
+        ...state,
+        cartdetails:[...state.cartdetails,action.details],
+        count:state.count + 1,
+      }
+      case 'UPDATE_CART':
+      return {
+        ...state,
+        cartdetails: [...state.cartdetails,action.details],
+        count:state.count + 1,
       }
 
     default:

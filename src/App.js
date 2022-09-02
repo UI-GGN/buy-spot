@@ -13,7 +13,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import { useState } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import {SharedModal} from './components/modal-component/shared-modal';
-
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductDescription } from './components/product-list-component/product-description/product-description'
@@ -42,6 +42,10 @@ function App() {
     return state.users.map((user) => user.email)
   })
 
+  const showCount = useSelector((state) => state.count)
+
+  console.log(showCount);
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -59,6 +63,12 @@ function App() {
             />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto">
+                <Nav.Link style={{ color: 'white' }}>
+                  <AiOutlineShoppingCart size={30}/>
+                    </Nav.Link>
+                    <div className="cartcount">
+                      <p className="count">{showCount}</p>
+                      </div>
                 <Nav.Link style={{ color: 'white' }} as={Link} to="/">
                   Home
                 </Nav.Link>
