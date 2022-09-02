@@ -25,33 +25,13 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
         "test": "react-scripts test --verbose",
         "eject": "react-scripts eject",
         "husky-install": "husky install",
         "lint": "eslint src --color",
         "prettier": "prettier src -check",
-        "lint-staged": "lint-staged --config lint-staged.js"
-    },
-    "jest": {
-        "collectCoverageFrom": [
-            "src/**/*.js",
-            "!src/index.js"
-        ],
-        "coverageThreshold": {
-            "global": {
-                "branches": 50,
-                "functions": 40,
-                "lines": 45,
-                "statements": 45
-            }
-        }
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
+        "lint-staged": "lint-staged --config lint-staged.js",
+        "build": "react-scripts build"
     },
     "browserslist": {
         "production": [
