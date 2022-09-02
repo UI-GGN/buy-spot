@@ -8,6 +8,94 @@ on:
     branches: [master]
 
 jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+      - name: Install dependencies
+        run: |
+         npm link
+         npm install  
+      - name: Build packages
+        run: |
+          npm build
+      - name: Running prettier
+        run: npm run prettier
+      - name: Running eslint
+        run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node-version: [16.x]
+    steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+              node-version: ${{ matrix.node-version }}
+              cache: 'yarn'
+        - name: Install dependencies
+          run: |
+              npm link
+              npm install
+        - name: Build packages
+          run: |
+              npm build
+        - name: test
+          run: npm run test -- --coverage --watchAll=false
+
+     
+
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+      - name: Install dependencies
+        run: |
+         npm link
+         npm install  
+      - name: Build packages
+        run: |
+          npm build
+      - name: npm ci
+        run: npm ci
+
+  security:
+    runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [16.x]
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: "yarn"
+        - name: Running audit check
+            run: npm audit
+            continue-on-error: true
+     
+
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -22,21 +110,24 @@ jobs:
           cache: "yarn"
       - name: Install dependencies
         run: |
-          yarn --frozen-lockfile
+         npm link
+         npm install  
       - name: Build packages
         run: |
-          yarn build
+          npm build
       - name: Upload production artifacts
         uses: actions/upload-artifact@v2
         with:
           name: Static Build folder
           path: |
             ./build
-      - name: npm ci
-        run: npm ci
-      - name: test
-        run: npm run test -- --coverage --watchAll=false
-      - name: format
-        run: npm run prettier
-      - name: lint
-        run: npm run lint
+
+
+
+
+
+     
+     
+    
+   
+
