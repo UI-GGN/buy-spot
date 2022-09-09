@@ -36,7 +36,7 @@ export const ProductDescription = () => {
     const [isRemove, setIsRemove] = useState(false);
     const handleClick = () => {
         const status = verifyExistingProduct();
-        console.log("status====>",status);
+        console.log('status====>', status);
         if (!status) {
             dispatch({
                 type: 'ADD_TO_CART',
@@ -48,26 +48,35 @@ export const ProductDescription = () => {
                 },
             });
             setIsShown(true);
+        } else if (status) {
+            dispatch({
+                type: 'UPDATE_CART',
+                details: {
+                    id: productdetails.id,
+                    title: productdetails.title,
+                    price: productdetails.price,
+                    quantity: count + 1,
+                },
+            });
+        } else {
+            dispatch({
+                type: 'REMOVE_ADD',
+                details: {
+                    id: productdetails.id,
+                    title: productdetails.title,
+                    price: productdetails.price,
+                    quantity:1,
+                },
+                
+            });
+            setIsRemove(true);
         }
-            else{
-                dispatch({
-                    type: 'UPDATE_CART',
-                    details: {
-                        id: productdetails.id,
-                        title: productdetails.title,
-                        price: productdetails.price,
-                        quantity: count + 1,
-                    },
-                });
-                setIsRemove(true);
-            }
-        }   
-
+    };
     const verifyExistingProduct = () => {
         const details = !!cart.find(
-            productdetails => productdetails.id === cart[0].id,
+            productdetails => productdetails.id === cart[count-1].id,
         );
-        console.log("verifyexisting====>",details);
+        console.log('verifyexisting====>', details);
         return details;
     };
 

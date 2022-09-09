@@ -36,8 +36,14 @@ const reducer = (state = intitialState, action) => {
       case 'UPDATE_CART':
       return {
         ...state,
-        cartdetails: [...state.cartdetails,action.details],
+        cartdetails:[...state.cartdetails,action.details],
         count:state.count + 1,
+      }
+      case 'REMOVE_ADD':
+      return {
+        ...state,
+        cartdetails:[...state.cartdetails,action.details],
+        count:0,
       }
 
     default:
