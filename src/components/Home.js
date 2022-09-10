@@ -8,14 +8,14 @@ import './footer-component/Footer.css';
 import PropTypes from 'prop-types';
 
 export const Home = props => {
-    const search = props.search;
+    const productData = props.productData;
     Home.propTypes = {
-        search: PropTypes.string.isRequired,
+        productData: PropTypes.array.isRequired,
     };
     return (
         <div>
             <BannerSlider />
-            <ProductList search={search} />
+            <ProductList productData={productData} />
             <Footer />
         </div>
     );

@@ -14,12 +14,15 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { SharedModal } from './components/modal-component/shared-modal';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { ProductDescription } from './components/product-list-component/product-description/product-description';
 
 function App() {
     const [showRegister, setShowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [search, setSearch] = useState('');
+    const [productdata, setProducts] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
     const handleShowRegister = () => setShowRegister(true);
 
@@ -32,10 +35,28 @@ function App() {
             payload: false,
         });
     };
+    const getProducts = async () => {
+        const response = await fetch('https://fakestoreapi.com/products');
+        setProducts(await response.json());
+    };
+
+    const filterProducts = () => {
+        const data = productdata.filter(
+            product =>
+                product.category.includes(search) ||
+                product.title.includes(search),
+        );
+        setFilteredData(data);
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
 
     const setValue = () => {
         const searchInput = document.getElementById('searchInput').value;
         setSearch(searchInput);
+        filterProducts();
     };
 
     const userLoggedIn = useSelector(state => {
@@ -145,7 +166,15 @@ function App() {
                         <Route path="/about" element={<About />}></Route>
                         <Route
                             path="/"
-                            element={<Home search={search} />}
+                            element={
+                                <Home
+                                    productData={
+                                        search === ''
+                                            ? productdata
+                                            : filteredData
+                                    }
+                                />
+                            }
                         ></Route>
                         <Route
                             path="/buyer-registration"
