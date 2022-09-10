@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { BuyerRegistration } from './components/register-form/buyer-registration';
 import { BuyerLogin } from './components/login-form/buyer-login';
 import { About } from './components/About';
@@ -10,7 +10,6 @@ import { Home } from './components/Home';
 import { SellerLogin } from './components/login-form/seller-login';
 import { SellerRegistration } from './components/register-form/seller-registration';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { useState } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { SharedModal } from './components/modal-component/shared-modal';
 
@@ -20,6 +19,7 @@ import { ProductDescription } from './components/product-list-component/product-
 function App() {
     const [showRegister, setShowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const [search, setSearch] = useState('');
 
     const handleShowRegister = () => setShowRegister(true);
 
@@ -33,6 +33,11 @@ function App() {
         });
     };
 
+    const setValue = () => {
+        const searchInput = document.getElementById('searchInput').value;
+        setSearch(searchInput);
+    };
+
     const userLoggedIn = useSelector(state => {
         return state.loggedInUser;
     });
@@ -43,7 +48,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="App">
+            <div className="app">
                 <Navbar style={{ backgroundColor: 'black' }} expand="lg">
                     <Container>
                         <Navbar.Brand
@@ -53,6 +58,19 @@ function App() {
                         >
                             BuySpot
                         </Navbar.Brand>
+                        <input
+                            className="search-input"
+                            id="searchInput"
+                            type="text"
+                            placeholder="Search....."
+                        />
+                        <button
+                            className="search-button"
+                            type="submit"
+                            onClick={setValue}
+                        >
+                            Search
+                        </button>
                         <Navbar.Toggle
                             aria-controls="basic-navbar-nav"
                             style={{
@@ -127,7 +145,7 @@ function App() {
                         <Route path="/about" element={<About />}></Route>
                         <Route
                             path="/"
-                            element={<Home search={'women'} />}
+                            element={<Home search={search} />}
                         ></Route>
                         <Route
                             path="/buyer-registration"
