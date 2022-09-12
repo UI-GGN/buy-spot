@@ -36,18 +36,35 @@ export const ProductDescription = () => {
     const [isRemove, setIsRemove] = useState(false);
     const handleClick = () => {
         const status = verifyExistingProduct();
-        console.log('status====>', status);
         if (!status) {
-            dispatch({
-                type: 'ADD_TO_CART',
-                details: {
-                    id: productdetails.id,
-                    title: productdetails.title,
-                    price: productdetails.price,
-                    quantity: count + 1,
-                },
-            });
-            setIsShown(true);
+            //if cart is empty
+            if (count == 0) {
+                setIsShown(true);
+                dispatch({
+                    type: 'ADD_TO_CART',
+                    details: {
+                        id: productdetails.id,
+                        title: productdetails.title,
+                        price: productdetails.price,
+                        quantity: count + 1,
+                    },
+                });
+                
+            }
+            //if cart is not empty and the product is to be removed
+            else {
+                setIsRemove(true);
+                // dispatch({
+                //     type: 'ADD_TO_CART',
+                //     details: {
+                //         id: productdetails.id,
+                //         title: productdetails.title,
+                //         price: productdetails.price,
+                //         quantity: count + 1,
+                //     },
+                // });
+                // setIsShown(true);
+            }
         } else if (status) {
             dispatch({
                 type: 'UPDATE_CART',
@@ -65,16 +82,15 @@ export const ProductDescription = () => {
                     id: productdetails.id,
                     title: productdetails.title,
                     price: productdetails.price,
-                    quantity:1,
+                    quantity: 1,
                 },
-                
             });
             setIsRemove(true);
         }
     };
     const verifyExistingProduct = () => {
         const details = !!cart.find(
-            productdetails => productdetails.id === cart[count-1].id,
+            productdetails => productdetails.id === cart[count - 1].id,
         );
         console.log('verifyexisting====>', details);
         return details;
