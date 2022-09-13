@@ -1,23 +1,22 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Modal from 'react-bootstrap/Modal'
-import React from 'react'
-import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
-import './shared-modal.css'
-import PropTypes from 'prop-types'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Modal from 'react-bootstrap/Modal';
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import './shared-modal.css';
+import PropTypes from 'prop-types';
 
 export const SharedModal = props => {
-    const property = props.property
-    const show = props.show
-    const setShow = props.setShow
-    const handleCloseModal = () => setShow(false)
+    const property = props.property;
+    const show = props.show;
+    const setShow = props.setShow;
+    const handleCloseModal = () => setShow(false);
 
     SharedModal.propTypes = {
         property: PropTypes.string.isRequired,
         show: PropTypes.bool.isRequired,
         setShow: PropTypes.func.isRequired,
-        onClick: PropTypes.func.isRequired,
-    }
+    };
 
     return (
         <Modal className="shared-modal" show={show} onHide={handleCloseModal}>
@@ -89,5 +88,5 @@ export const SharedModal = props => {
                 </Modal.Footer>
             </div>
         </Modal>
-    )
-}
+    );
+};
