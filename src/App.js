@@ -55,7 +55,7 @@ function App() {
 
     const setValue = () => {
         const searchInput = document.getElementById('searchInput').value;
-        setSearch(searchInput.toLowerCase().slice(0, 3));
+        setSearch(searchInput.toLowerCase());
         filterProducts();
     };
 
