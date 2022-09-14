@@ -9,12 +9,14 @@ import PropTypes from 'prop-types';
 
 export const Home = props => {
     const productData = props.productData;
+    const isSearch = props.isSearch;
     Home.propTypes = {
         productData: PropTypes.array.isRequired,
+        isSearch: PropTypes.bool.isRequired,
     };
     return (
         <div>
-            <BannerSlider />
+            {isSearch ? <div></div> : <BannerSlider />}
             <ProductList productData={productData} />
             <Footer />
         </div>

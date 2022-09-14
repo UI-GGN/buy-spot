@@ -23,6 +23,7 @@ function App() {
     const [search, setSearch] = useState('');
     const [productdata, setProducts] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
+    const [isSearched, setIsSearched] = useState(false);
 
     const handleShowRegister = () => setShowRegister(true);
 
@@ -54,9 +55,14 @@ function App() {
     }, []);
 
     const setValue = () => {
+        setIsSearched(true);
         const searchInput = document.getElementById('searchInput').value;
         setSearch(searchInput.toLowerCase());
         filterProducts();
+    };
+
+    const onClickHome = () => {
+        setIsSearched(false);
     };
 
     const userLoggedIn = useSelector(state => {
@@ -76,6 +82,7 @@ function App() {
                             style={{ color: 'white' }}
                             as={Link}
                             to="/"
+                            onClick={onClickHome}
                         >
                             BuySpot
                         </Navbar.Brand>
@@ -105,6 +112,7 @@ function App() {
                                     style={{ color: 'white' }}
                                     as={Link}
                                     to="/"
+                                    onClick={onClickHome}
                                 >
                                     Home
                                 </Nav.Link>
@@ -173,6 +181,7 @@ function App() {
                                             ? productdata
                                             : filteredData
                                     }
+                                    isSearch={isSearched}
                                 />
                             }
                         ></Route>
