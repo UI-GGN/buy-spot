@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import './form.css'
 import validation from "./validation";
 import {useDispatch} from "react-redux";
-
-import {Link} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import './form.css';
 
 export const SellerRegistration = () => {
     const [userDetails, setUserDetails] = useState({
@@ -12,15 +11,17 @@ export const SellerRegistration = () => {
         confirmPassword: null,
         phoneNumber: null,
         role: "seller"
-    })
-    const [errors, setErrors] = useState({})
-
+    });
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [errors, setErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
     const [touched, setTouchedFields] = useState({
         email: false,
         password: false,
         confirmPassword: false,
         phoneNumber: false
-    })
+    });
 
     const resetInputFields = () => {
         setTouchedFields({
@@ -37,77 +38,56 @@ export const SellerRegistration = () => {
         })
     };
 
-
     const handleChange = (e) => {
         setUserDetails({
             ...userDetails,
             [e.target.name]: e.target.value,
         })
-    }
+    };
+
     const handleValidations = (e) => {
         setTouchedFields({
             ...touched, [e.target.name]: true,
         })
         setErrors(validation(userDetails, e.target['name']))
-    }
-
-    const dispatch = useDispatch()
-
-    const [isSubmit, setIsSubmit] = useState(false)
-
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
         dispatch({
             type: 'REGISTER',
             payload: {
-                id: new Date().getTime(),
-                email: userDetails.email,
-                password: userDetails.password,
-                confirmPassword: userDetails.confirmPassword,
-                phoneNumber: userDetails.phoneNumber,
                 role: "seller"
             },
         })
-        setIsSubmit(true)
+        setIsSubmit(true);
+        navigate('/');
         resetInputFields();
-    }
+    };
+
     return (
         <div className="register-form">
-            {Object.keys(errors).length === 0 && isSubmit ? (
-                <div className="success-page">
-                    <h3>Successfully Registered</h3>
-                    <Link
-                        style={{textDecoration: 'none', color: 'white'}}
-                        to="/seller-login"
-                        className="success-page-link"
-                    >
-                        Login as Seller
-                    </Link>
-                </div>
-            ) : (
-                <form onSubmit={handleSubmit}>
-                    <h3>Seller Registration</h3>
-
-                    <div className="form-inputs">
-                        <label>Email address</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={userDetails.email}
-                            onChange={handleChange}
-                            placeholder="Enter email"
-                            onKeyUp={handleChange}
-                            autoComplete="off"
-                            onBlur={handleValidations}
-                        />
-                        <div style={{height: '36px'}}>
-                            {touched.email && errors.email && <p>{errors.email}</p>}
-                        </div>
+        
+              <form onSubmit={handleSubmit}>
+                <h3>Seller Registration</h3>
+                <div className="form-inputs">
+                    <label>Email address</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={userDetails.email}
+                        onChange={handleChange}
+                        placeholder="Enter email"
+                        onKeyUp={handleChange}
+                        autoComplete="off"
+                        onBlur={handleValidations}
+                    />
+                    <div style={{height: '36px'}}>
+                        {touched.email && errors.email && <p>{errors.email}</p>}
                     </div>
-
-                    <div className="form-inputs">
+                </div>
+                
+                <div className="form-inputs">
                         <label>Password</label>
                         <input
                             type="password"
@@ -123,7 +103,7 @@ export const SellerRegistration = () => {
 
                             {touched.password && errors.password && <p>{errors.password}</p>}
                         </div>
-                    </div>
+                </div>  
 
                     <div className="form-inputs">
                         <label>Confirm Password</label>
@@ -158,6 +138,7 @@ export const SellerRegistration = () => {
                             {touched.phoneNumber && errors.phoneNumber && <p>{errors.phoneNumber}</p>}
                         </div>
                     </div>
+
                     <button
                         variant="primary"
                         type="submit"
@@ -171,8 +152,8 @@ export const SellerRegistration = () => {
                     >
                         Submit
                     </button>
+                    { isSubmit ? handleSubmit : '' }
                 </form>
-            )}
         </div>
     )
 }

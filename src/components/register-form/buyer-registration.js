@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import validation from './validation'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import './form.css'
-
-import { Link } from 'react-router-dom'
 
 export const BuyerRegistration = () => {
   const [userDetails, setUserDetails] = useState({
@@ -12,16 +11,17 @@ export const BuyerRegistration = () => {
     confirmPassword: null,
     phoneNumber: null,
     role: "buyer"
-  })
-
-  const [errors, setErrors] = useState({})
-
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const [touched, setTouchedFields] = useState({
     email: false,
     password: false,
     confirmPassword: false,
     phoneNumber: false
-  })
+  });
 
   const resetInputFields = () => {
     setTouchedFields({
@@ -44,50 +44,30 @@ export const BuyerRegistration = () => {
       ...userDetails,
       [e.target.name]: e.target.value,
     })
-  }
+  };
+
   const handleValidations = (e) => {
     setTouchedFields({
       ...touched, [e.target.name]: true,
     })
     setErrors(validation(userDetails, e.target['name']))
-  }
-
-  const dispatch = useDispatch()
-
-  const [isSubmit, setIsSubmit] = useState(false)
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     dispatch({
       type: 'REGISTER',
       payload: {
-        id: new Date().getTime(),
-        email: userDetails.email,
-        password: userDetails.password,
-        confirmPassword: userDetails.confirmPassword,
-        phoneNumber: userDetails.phoneNumber,
         role:"buyer"
       },
     })
-    setIsSubmit(true)
+    setIsSubmit(true);
+    navigate('/');
     resetInputFields();
-  }
+  };
 
   return (
     <div className="register-form">
-      {Object.keys(errors).length === 0 && isSubmit ? (
-        <div className="success-page">
-          <h3>Successfully Registered</h3>
-          <Link
-            style={{ textDecoration: 'none', color: 'white' }}
-            to="/buyer-login"
-            className="success-page-link"
-          >
-            Login as Buyer
-          </Link>
-        </div>
-      ) : (
         <form onSubmit={handleSubmit}>
           <h3>Buyer Registration</h3>
 
@@ -100,8 +80,8 @@ export const BuyerRegistration = () => {
               onChange={handleChange}
               placeholder="Enter email"
               onKeyUp={handleChange}
+              autoComplete = 'off'
               onBlur={handleValidations}
-
             />
             <div style={{ height: '36px' }}>
               {touched.email && errors.email && <p>{errors.email}</p>}
@@ -117,8 +97,8 @@ export const BuyerRegistration = () => {
               onChange={handleChange}
               placeholder="Enter Password"
               onKeyUp={handleChange}
+              autoComplete = 'off'
               onBlur={handleValidations}
-
             />{' '}
             <div style={{ height: '36px' }}>
               {touched.password && errors.password && <p>{errors.password}</p>}
@@ -134,6 +114,7 @@ export const BuyerRegistration = () => {
               onChange={handleChange}
               placeholder="Confirm Password"
               onKeyUp={handleChange}
+              autoComplete = 'off'
               onBlur={handleValidations}
             />{' '}
             <div style={{ height: '36px' }}>
@@ -150,6 +131,7 @@ export const BuyerRegistration = () => {
               onChange={handleChange}
               placeholder="Phone Number"
               onKeyUp={handleChange}
+              autoComplete = 'off'
               onBlur={handleValidations}
             />{' '}
             <div style={{ height: '36px' }}>
@@ -170,8 +152,8 @@ export const BuyerRegistration = () => {
           >
             Submit
           </button>
+          { isSubmit ? handleSubmit : '' }
         </form>
-      )}
     </div>
   )
 }
