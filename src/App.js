@@ -200,6 +200,10 @@ function App() {
                             path="/product/:productId"
                             element={<ProductDescription />}
                         ></Route>
+                        <Route
+                            path="/search/product/:productId"
+                            element={<ProductDescription />}
+                        ></Route>
                     </Routes>
                 </div>
             </div>
