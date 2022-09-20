@@ -1,4 +1,5 @@
-import React from 'react'
+
+import React, { useState } from 'react';
 import './index.css'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -10,126 +11,201 @@ import { Home } from './components/Home'
 import { SellerLogin } from './components/login-form/seller-login'
 import { SellerRegistration } from './components/register-form/seller-registration'
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import { useState } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import {SharedModal} from './components/modal-component/shared-modal';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductDescription } from './components/product-list-component/product-description/product-description'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from 'react';
 
 function App() {
-  const [showRegister, setShowRegister] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
+    const [showRegister, setShowRegister] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [search, setSearch] = useState('');
+    const [productdata, setProducts] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
-  const handleShowRegister = () => setShowRegister(true)
+    const handleShowRegister = () => setShowRegister(true);
 
-  const handleShowLogin = () => setShowLogin(true)
-  const dispatch = useDispatch()
+    const handleShowLogin = () => setShowLogin(true);
+    const dispatch = useDispatch();
 
-  const handleLoggedOut = () => {
-    dispatch({
-      type: 'LOGOUT',
-      payload: false,
-    })
-  }
+    const handleLoggedOut = () => {
+        dispatch({
+            type: 'LOGOUT',
+            payload: false,
+        });
+    };
+    const getProducts = async () => {
+        const response = await fetch('https://fakestoreapi.com/products');
+        setProducts(await response.json());
+    };
 
-  const userLoggedIn = useSelector((state) => {
-    return state.loggedInUser
-  })
+    const filterProducts = () => {
+        const data = productdata.filter(
+            product =>
+                product.category.includes(search) ||
+                product.title.includes(search),
+        );
+        setFilteredData(data);
+    };
 
-  const userEmail = useSelector((state) => {
-    return state.users.map((user) => user.email)
-  })
+    useEffect(() => {
+        getProducts();
+    }, []);
+
+    const setValue = () => {
+        const searchInput = document.getElementById('searchInput').value;
+        setSearch(searchInput.toLowerCase());
+        filterProducts();
+    };
+
+    const userLoggedIn = useSelector(state => {
+        return state.loggedInUser;
+    });
 
   const showCount = useSelector((state) => state.count)
+  const userEmail = useSelector(state => {
+    return state.users.map(user => user.email);
+});
 
   console.log(showCount);
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar style={{ backgroundColor: 'black' }} expand="lg">
-          <Container>
-            <Navbar.Brand style={{ color: 'white' }} as={Link} to="/">
-              BuySpot
-            </Navbar.Brand>
-            <Navbar.Toggle
-              aria-controls="basic-navbar-nav"
-              style={{
-                backgroundColor: 'rgb(255,255,255,0.5)',
-                height: '2.3rem',
-              }}
-            />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ms-auto">
-                <Nav.Link style={{ color: 'white' }}>
-                  <AiOutlineShoppingCart size={30}/>
-                    </Nav.Link>
-                    <div className="cartcount">
-                      <p className="count">{showCount}</p>
-                      </div>
-                <Nav.Link style={{ color: 'white' }} as={Link} to="/">
-                  Home
-                </Nav.Link>
-                <Nav.Link style={{ color: 'white' }} as={Link} to="/about">
-                  About
-                </Nav.Link>
-                {userLoggedIn ? (
-                  <NavDropdown
-                    title={'Hi ' + userEmail.pop().split('@').shift()}
-                    id="basic-nav-dropdown"
-                  >
-                    <NavDropdown.Item onClick={handleLoggedOut}>
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                ) : (
-                  <div style={{ display: 'flex' }}>
-                    <Nav.Link
-                      style={{ color: 'white' }}
-                      onClick={handleShowRegister}
-                    >
-                      Register
-                    </Nav.Link>
+   
+        <BrowserRouter>
+            <div className="app">
+                <Navbar style={{ backgroundColor: 'black' }} expand="lg">
+                    <Container>
+                        <Navbar.Brand
+                            style={{ color: 'white' }}
+                            as={Link}
+                            to="/"
+                        >
+                            BuySpot
+                        </Navbar.Brand>
+                        <input
+                            className="search-input"
+                            id="searchInput"
+                            type="text"
+                            placeholder="Search....."
+                        />
+                        <button
+                            className="search-button"
+                            type="submit"
+                            onClick={setValue}
+                        >
+                            Search
+                        </button>
+                        <Navbar.Toggle
+                            aria-controls="basic-navbar-nav"
+                            style={{
+                                backgroundColor: 'rgb(255,255,255,0.5)',
+                                height: '2.3rem',
+                            }}
+                        />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="ms-auto">
+                                <Nav.Link
+                                    style={{ color: 'white' }}
+                                    as={Link}
+                                    to="/"
+                                >
+                                    Home
+                                </Nav.Link>
+                                <Nav.Link
+                                    style={{ color: 'white' }}
+                                    as={Link}
+                                    to="/about"
+                                >
+                                    About
+                                </Nav.Link>
+                                {userLoggedIn ? (
+                                    <NavDropdown
+                                        title={
+                                            'Hi ' +
+                                            userEmail.pop().split('@').shift()
+                                        }
+                                        id="basic-nav-dropdown"
+                                    >
+                                        <NavDropdown.Item
+                                            onClick={handleLoggedOut}
+                                        >
+                                            Logout
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                ) : (
+                                    <div style={{ display: 'flex' }}>
+                                        <Nav.Link
+                                            style={{ color: 'white' }}
+                                            onClick={handleShowRegister}
+                                        >
+                                            Register
+                                        </Nav.Link>
 
-                    <Nav.Link
-                      style={{ color: 'white' }}
-                      onClick={handleShowLogin}
-                    >
-                      Login
-                    </Nav.Link>
-                  </div>
-                )}
+                                        <Nav.Link
+                                            style={{ color: 'white' }}
+                                            onClick={handleShowLogin}
+                                        >
+                                            Login
+                                        </Nav.Link>
+                                    </div>
+                                )}
 
-                <SharedModal show={showLogin} setShow={setShowLogin} property={"Login"}/>
-                <SharedModal show={showRegister} setShow={setShowRegister} property={"Register"}/>
-                
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-        <div>
-          <Routes>
-            <Route path="/about" element={<About />}></Route>
-            <Route path="/" element={<Home />}></Route>
-            <Route
-              path="/buyer-registration"
-              element={<BuyerRegistration />}
-            ></Route>
-            <Route
-              path="/seller-registration"
-              element={<SellerRegistration />}
-            ></Route>
-            <Route path="/buyer-login" element={<BuyerLogin />}></Route>
-            <Route path="/seller-login" element={<SellerLogin />}></Route>
-            <Route path="/product/:productId" element={<ProductDescription/>}></Route>
-          </Routes>
-        </div>
-      </div>
-    </BrowserRouter>
-
-  )
+                                <SharedModal
+                                    show={showLogin}
+                                    setShow={setShowLogin}
+                                    property={'Login'}
+                                />
+                                <SharedModal
+                                    show={showRegister}
+                                    setShow={setShowRegister}
+                                    property={'Register'}
+                                />
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+                <div>
+                    <Routes>
+                        <Route path="/about" element={<About />}></Route>
+                        <Route
+                            path="/"
+                            element={
+                                <Home
+                                    productData={
+                                        search === ''
+                                            ? productdata
+                                            : filteredData
+                                    }
+                                />
+                            }
+                        ></Route>
+                        <Route
+                            path="/buyer-registration"
+                            element={<BuyerRegistration />}
+                        ></Route>
+                        <Route
+                            path="/seller-registration"
+                            element={<SellerRegistration />}
+                        ></Route>
+                        <Route
+                            path="/buyer-login"
+                            element={<BuyerLogin />}
+                        ></Route>
+                        <Route
+                            path="/seller-login"
+                            element={<SellerLogin />}
+                        ></Route>
+                        <Route
+                            path="/product/:productId"
+                            element={<ProductDescription />}
+                        ></Route>
+                    </Routes>
+                </div>
+            </div>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;

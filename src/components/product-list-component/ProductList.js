@@ -1,34 +1,33 @@
-import React from 'react'
-import Product from './Product'
-import './Product.css'
-import { useEffect, useState } from 'react'
+import React from 'react';
+import Product from './Product';
+import './Product.css';
+import PropTypes from 'prop-types';
 
-const ProductList = () => {
-    const [productdata, setProducts] = useState([])
-
-    const getProducts = async () => {
-        const response = await fetch('https://fakestoreapi.com/products')
-        setProducts(await response.json())
-    }
-
-    useEffect(() => {
-        getProducts()
-    }, []) 
+const ProductList = ({ productData }) => {
+    const productLength = productData?.length === 0;
+    ProductList.propTypes = {
+        productData: PropTypes.array.isRequired,
+    };
+    const success = 'Featured Products';
+    const failure = 'No Products found';
 
     return (
         <div className="product-list" data-testid="product-list">
-            <div className="featured-products">Featured Products</div>
+            <div className="featured-products">
+                {' '}
+                {productLength ? failure : success}
+            </div>
             <div className="product-container">
                 <div className="product-inner-container">
-                    {productdata.slice(1, 16).map(curProduct => {
+                    {productData?.map(curProduct => {
                         return (
-                            <Product key={curProduct.id} product={curProduct}  />
-                        )
+                            <Product key={curProduct.id} product={curProduct} />
+                        );
                     })}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProductList
+export default ProductList;
