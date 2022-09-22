@@ -1,22 +1,23 @@
-
 import React, { useState } from 'react';
-import './index.css'
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { BuyerRegistration } from './components/register-form/buyer-registration'
-import { BuyerLogin } from './components/login-form/buyer-login'
-import { About } from './components/About'
-import { Home } from './components/Home'
-import { SellerLogin } from './components/login-form/seller-login'
-import { SellerRegistration } from './components/register-form/seller-registration'
-import { Container, Nav, Navbar } from 'react-bootstrap'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import {SharedModal} from './components/modal-component/shared-modal';
-import { useDispatch, useSelector } from 'react-redux'
-import { ProductDescription } from './components/product-list-component/product-description/product-description'
+import './index.css';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BuyerRegistration } from './components/register-form/buyer-registration';
+import { BuyerLogin } from './components/login-form/buyer-login';
+import { About } from './components/About';
+import { Home } from './components/Home';
+import { SellerLogin } from './components/login-form/seller-login';
+import { SellerRegistration } from './components/register-form/seller-registration';
+import {  Container, Nav, Navbar } from 'react-bootstrap';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { SharedModal } from './components/modal-component/shared-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { ProductDescription } from './components/product-list-component/product-description/product-description';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
+import Cart from './components/Cart/Cart';
+import CartonHeader from './components/Cart/CartonHeader';
 
 function App() {
     const [showRegister, setShowRegister] = useState(false);
@@ -63,16 +64,12 @@ function App() {
     const userLoggedIn = useSelector(state => {
         return state.loggedInUser;
     });
+ 
+    const userEmail = useSelector(state => {
+        return state.users.map(user => user.email);
+    });
 
-  const showCount = useSelector((state) => state.count)
-  const userEmail = useSelector(state => {
-    return state.users.map(user => user.email);
-});
-
-  console.log(showCount);
-
-  return (
-   
+    return (
         <BrowserRouter>
             <div className="app">
                 <Navbar style={{ backgroundColor: 'black' }} expand="lg">
@@ -106,6 +103,8 @@ function App() {
                         />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ms-auto">
+                                <CartonHeader/>
+
                                 <Nav.Link
                                     style={{ color: 'white' }}
                                     as={Link}
@@ -200,6 +199,10 @@ function App() {
                         <Route
                             path="/product/:productId"
                             element={<ProductDescription />}
+                        ></Route>
+                        <Route
+                            path="/Cart"
+                            element={<Cart />}
                         ></Route>
                     </Routes>
                 </div>
