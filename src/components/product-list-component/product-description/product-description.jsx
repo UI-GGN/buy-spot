@@ -3,23 +3,19 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
 import './product-description.css';
 import Rating from './Rating';
 import Footer from '../../footer-component/Footer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Button } from '@material-ui/core';
+
 export const ProductDescription = () => {
     const [productdetails, setProductDetails] = useState([]);
-    const cart = useSelector(state => state.cartdetails);
-    const count = useSelector(state => state.count);
-
-    console.log('cart===>', cart);
-
+   
     const dispatch = useDispatch();
 
     const { productId } = useParams();
-
+   
     const getProductdetails = async () => {
         const response = await fetch(
             `https://fakestoreapi.com/products/${productId}`,
@@ -32,70 +28,15 @@ export const ProductDescription = () => {
         getProductdetails();
     }, []);
 
-    const [isShown, setIsShown] = useState(false);
-    const [isRemove, setIsRemove] = useState(false);
-    const handleClick = () => {
-        const status = verifyExistingProduct();
-        if (!status) {
-            //if cart is empty
-            if (count == 0) {
-                setIsShown(true);
-                dispatch({
-                    type: 'ADD_TO_CART',
-                    details: {
-                        id: productdetails.id,
-                        title: productdetails.title,
-                        price: productdetails.price,
-                        quantity: count + 1,
-                    },
-                });
-                
-            }
-            //if cart is not empty and the product is to be removed
-            else {
-                setIsRemove(true);
-                // dispatch({
-                //     type: 'ADD_TO_CART',
-                //     details: {
-                //         id: productdetails.id,
-                //         title: productdetails.title,
-                //         price: productdetails.price,
-                //         quantity: count + 1,
-                //     },
-                // });
-                // setIsShown(true);
-            }
-        } else if (status) {
-            dispatch({
-                type: 'UPDATE_CART',
-                details: {
-                    id: productdetails.id,
-                    title: productdetails.title,
-                    price: productdetails.price,
-                    quantity: count + 1,
-                },
-            });
-        } else {
-            dispatch({
-                type: 'REMOVE_ADD',
-                details: {
-                    id: productdetails.id,
-                    title: productdetails.title,
-                    price: productdetails.price,
-                    quantity: 1,
-                },
-            });
-            setIsRemove(true);
-        }
-    };
-    const verifyExistingProduct = () => {
-        const details = !!cart.find(
-            productdetails => productdetails.id === cart[count - 1].id,
-        );
-        console.log('verifyexisting====>', details);
-        return details;
-    };
+    const handleClick = () =>
+    {
+        dispatch({
+            type: "ADD_TO_CART",
+              payload: productdetails,
+             });
 
+    }
+   
     return (
         <>
             <main className="description-container">
@@ -143,33 +84,31 @@ export const ProductDescription = () => {
                         <p> {productdetails.description}</p>
                     </div>
 
-                    <div>
-                        <button onClick={handleClick} className="cart-btn">
-                            <AiOutlineShoppingCart />
-                            ADD TO CART
-                        </button>
-                        <button className="wishlist-btn">
-                            <AiOutlineHeart />
-                            WISHLIST
-                        </button>
-                        {isShown && (
-                            <div className="add_to_cart">
-                                <p className="display">Product added to cart</p>
-                            </div>
-                        )}
-                        {isRemove && (
-                            <div>
-                                <p>Replace the product in cart</p>
-                                <button className="remove-btn">
-                                    Replace the product in cart
-                                </button>
-                                <button className="remove-btn">Cancel</button>
-                            </div>
-                        )}
+                <div>
+                
+                
+                      <Button
+                      variant="contained"
+                      onClick={() =>
+                       dispatch({
+                      type: "REMOVE_FROM_CART",
+                     payload: productdetails,
+                     })
+                       }
+                     >
+                     Wishlist
+                     </Button>
+                <Button 
+                    variant="contained"
+                    color="secondary"
+                    onClick= {handleClick}
+                     >Add to Cart
+                    </Button>
+                     
                     </div>
+                
                 </div>
             </main>
             <Footer />
         </>
-    );
-};
+    )};
