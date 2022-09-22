@@ -4,7 +4,6 @@ const intitialState = {
   users: [],
   loggedInUser: false,
   cartdetails:[],
-  count: 0
 }
 
 const reducer = (state = intitialState, action) => {
@@ -30,20 +29,12 @@ const reducer = (state = intitialState, action) => {
     case 'ADD_TO_CART':
       return {
         ...state,
-        cartdetails:[...state.cartdetails,action.details],
-        count:state.count + 1,
+        cartdetails:[...state.cartdetails,action.payload],
       }
-      case 'UPDATE_CART':
+      case 'REMOVE_FROM_CART':
       return {
         ...state,
-        cartdetails:[...state.cartdetails,action.details],
-        count:state.count + 1,
-      }
-      case 'REMOVE_ADD':
-      return {
-        ...state,
-        cartdetails:[...state.cartdetails,action.details],
-        count:0,
+        cartdetails:[...state.cartdetails,action.payload],
       }
 
     default:
