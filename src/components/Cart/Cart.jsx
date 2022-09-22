@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { useSelector,useDispatch } from 'react-redux';
-import Rating from "../product-description/Rating";
+import Rating from "../product-list-component/product-description/Rating";
 
 
 const Cart = () => {
@@ -25,7 +25,7 @@ const Cart = () => {
           {cart.map((prod) => (
             <ListGroup.Item key={prod.id}>
               <Row>
-                <Col md={2}>
+                <Col>
                   <Image src={prod.image} alt={prod.name} fluid rounded />
                 </Col>
                 <Col md={2}>
