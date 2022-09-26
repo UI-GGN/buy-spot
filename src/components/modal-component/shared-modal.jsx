@@ -43,34 +43,29 @@ export const SharedModal = props => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="modal-footer border-0">
-                    <Button
-                        variant="light"
-                        onClick={handleCloseModal}
-                        data-testid="buyerButton"
-                        className={'modal-button-primary'}
+                    <Link
+                        style={{
+                            textDecoration: 'none',
+                            color: 'inherit',
+                            fontSize: '18px',
+                        }}
+                        to={
+                            property === 'Login'
+                                ? '/buyer-login'
+                                : '/buyer-registration'
+                        }
                     >
-                        <Link
-                            style={{
-                                textDecoration: 'none',
-                                color: 'inherit',
-                                fontSize: '18px',
-                            }}
-                            to={
-                                property === 'Login'
-                                    ? '/buyer-login'
-                                    : '/buyer-registration'
-                            }
+                        <Button
+                            variant="light"
+                            onClick={handleCloseModal}
+                            data-testid="buyerButton"
+                            className={'modal-button-primary'}
                         >
                             Buyer
-                        </Link>
-                    </Button>
-                    <Button
-                        variant="light"
-                        onClick={handleCloseModal}
-                        data-testid="sellerButton"
-                        className={'modal-button-secondary'}
-                    >
-                        <Link
+                        </Button>
+                    </Link>
+
+                    <Link
                             style={{
                                 textDecoration: 'none',
                                 color: 'inherit',
@@ -81,10 +76,16 @@ export const SharedModal = props => {
                                     ? '/seller-login'
                                     : '/seller-registration'
                             }
-                        >
+                    >
+                        <Button
+                            variant="light"
+                            onClick={handleCloseModal}
+                            data-testid="sellerButton"
+                            className={'modal-button-secondary'}
+                        >  
                             Seller
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 </Modal.Footer>
             </div>
         </Modal>
