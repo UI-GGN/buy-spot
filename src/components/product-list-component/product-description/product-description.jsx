@@ -2,20 +2,27 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './product-description.css';
 import Rating from './Rating';
 import Footer from '../../footer-component/Footer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
+import { AiFillCheckCircle } from 'react-icons/ai';
+import { NavLink } from 'react-bootstrap';
 
 export const ProductDescription = () => {
     const [productdetails, setProductDetails] = useState([]);
-   
+    const [buttonText, setButtonText] = useState('Add to cart');
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isShown, setIsShown] = useState(false);
+
     const dispatch = useDispatch();
 
     const { productId } = useParams();
-   
+
+    const cart = useSelector(state => state.cartdetails);
+
     const getProductdetails = async () => {
         const response = await fetch(
             `https://fakestoreapi.com/products/${productId}`,
@@ -28,15 +35,25 @@ export const ProductDescription = () => {
         getProductdetails();
     }, []);
 
-    const handleClick = () =>
-    {
-        dispatch({
-            type: "ADD_TO_CART",
-              payload: productdetails,
-             });
+    const handleClick = () => {
+        setButtonText('Product Added');
+        setIsShown(true);
+        setTimeout(() => {
+            setIsShown(false);
+        }, 2000);
+        setIsDisabled(true);
 
-    }
-   
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: productdetails,
+        });
+    };
+
+    const check = id => {
+        return id in cart.productId;
+    };
+    console.log(check);
+
     return (
         <>
             <main className="description-container">
@@ -84,31 +101,38 @@ export const ProductDescription = () => {
                         <p> {productdetails.description}</p>
                     </div>
 
-                <div>
-                
-                
-                      <Button
-                      variant="contained"
-                      onClick={() =>
-                       dispatch({
-                      type: "REMOVE_FROM_CART",
-                     payload: productdetails,
-                     })
-                       }
-                     >
-                     Wishlist
-                     </Button>
-                <Button 
-                    variant="contained"
-                    color="secondary"
-                    onClick= {handleClick}
-                     >Add to Cart
-                    </Button>
-                     
+                    <div>
+                        <NavLink
+                            style={{ color: 'white' }}
+                            as={Link}
+                            to="/products"
+                        >
+                            <Button variant="contained">
+                                Back to Products
+                            </Button>
+                        </NavLink>
+
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            disabled={isDisabled}
+                            onClick={handleClick}
+                        >
+                            {buttonText}
+                        </Button>
+
+                        {isShown && (
+                            <div className="my-toast">
+                                <h3>
+                                    <AiFillCheckCircle color="green" />
+                                    Product Added to Cart
+                                </h3>
+                            </div>
+                        )}
                     </div>
-                
                 </div>
             </main>
             <Footer />
         </>
-    )};
+    );
+};
