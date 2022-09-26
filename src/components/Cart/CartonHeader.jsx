@@ -7,6 +7,7 @@ import {
   Dropdown
 } from "react-bootstrap";
 import { Link} from "react-router-dom";
+import './Cart.css';
 import { useSelector,useDispatch } from 'react-redux';
 
 const CartonHeader = () => {
@@ -21,7 +22,7 @@ const CartonHeader = () => {
               <Badge>{ lengthofcart}</Badge>
             </Dropdown.Toggle>
 
-            <Dropdown.Menu style={{ minWidth: 370 }}>
+            <Dropdown.Menu style={{ minWidth: 200 }}>
               {lengthofcart > 0 ? (
                 <>
                   {cart.map((prod) => (
