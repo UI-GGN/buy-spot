@@ -49,11 +49,6 @@ function App() {
         );
         setFilteredData(data);
     };
-
-    useEffect(() => {
-        getProducts();
-    }, []);
-
     const setValue = () => {
         const searchInput = document.getElementById('searchInput').value;
         setSearch(searchInput.toLowerCase());
@@ -67,6 +62,14 @@ function App() {
     const userLoggedIn = useSelector(state => {
         return state.loggedInUser;
     });
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('userDetails', userLoggedIn);
+    }, [userLoggedIn]);
 
     const userEmail = useSelector(state => {
         return state.users.map(user => user.email);
