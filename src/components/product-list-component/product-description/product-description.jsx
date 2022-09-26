@@ -2,14 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './product-description.css';
 import Rating from './Rating';
 import Footer from '../../footer-component/Footer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import { NavLink } from 'react-bootstrap';
 
 export const ProductDescription = () => {
     const [productdetails, setProductDetails] = useState([]);
@@ -21,7 +20,7 @@ export const ProductDescription = () => {
 
     const { productId } = useParams();
 
-    const cart = useSelector(state => state.cartdetails);
+    const navigate = useNavigate();
 
     const getProductdetails = async () => {
         const response = await fetch(
@@ -48,11 +47,6 @@ export const ProductDescription = () => {
             payload: productdetails,
         });
     };
-
-    const check = id => {
-        return id in cart.productId;
-    };
-    console.log(check);
 
     return (
         <>
@@ -102,15 +96,12 @@ export const ProductDescription = () => {
                     </div>
 
                     <div>
-                        <NavLink
-                            style={{ color: 'white' }}
-                            as={Link}
-                            to="/products"
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate(-1)}
                         >
-                            <Button variant="contained">
-                                Back to Products
-                            </Button>
-                        </NavLink>
+                            Go back
+                        </Button>
 
                         <Button
                             variant="contained"
