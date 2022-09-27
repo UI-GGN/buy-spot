@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './index.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { BuyerRegistration } from './components/register-form/buyer-registration';
 import { BuyerLogin } from './components/login-form/buyer-login';
 import { About } from './components/About';
@@ -10,13 +10,15 @@ import { Home } from './components/Home';
 import { Search } from './components/Search';
 import { SellerLogin } from './components/login-form/seller-login';
 import { SellerRegistration } from './components/register-form/seller-registration';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import {  Container, Nav, Navbar } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { SharedModal } from './components/modal-component/shared-modal';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { ProductDescription } from './components/product-list-component/product-description/product-description';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from 'react';
+import Cart from './components/Cart/Cart';
+import CartonHeader from './components/Cart/CartonHeader';
 
 function App() {
     const [showRegister, setShowRegister] = useState(false);
@@ -67,7 +69,7 @@ function App() {
     const userLoggedIn = useSelector(state => {
         return state.loggedInUser;
     });
-
+ 
     const userEmail = useSelector(state => {
         return state.users.map(user => user.email);
     });
@@ -108,6 +110,8 @@ function App() {
                         />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ms-auto">
+                                <CartonHeader/>
+
                                 <Nav.Link
                                     style={{ color: 'white' }}
                                     as={Link}
@@ -202,7 +206,11 @@ function App() {
                         ></Route>
                         <Route
                             path="/search/product/:productId"
-                            element={<ProductDescription />}
+                            element={<ProductDescription />}>
+                            </Route>
+                            <Route
+                            path="/Cart"
+                            element={<Cart />}
                         ></Route>
                     </Routes>
                 </div>

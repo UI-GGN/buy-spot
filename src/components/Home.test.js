@@ -19,3 +19,4 @@ test('should render product-list', () => {
     const Element = screen.getByText('Featured Products');
     expect(Element).toBeInTheDocument();
 });
+

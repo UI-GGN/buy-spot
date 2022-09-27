@@ -16,7 +16,7 @@ const Product = product => {
       <Link to={'product/' + product.product.id} className="product-page-link">
         <img className="img" src={product.product.image} alt="products" />
         <br className="img-gap"></br>
-        <div className="product-label">
+        <div className="product-label"  >
             <div className="category">{product.product.category}</div>
 
             {showPrice ? (
@@ -34,7 +34,6 @@ const Product = product => {
         </Link>
     </div>
 )
-
 }
 Product.propTypes = {
   product:PropTypes.object.isRequired ,
