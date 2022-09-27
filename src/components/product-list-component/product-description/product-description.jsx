@@ -99,6 +99,7 @@ export const ProductDescription = () => {
                         <Button
                             variant="contained"
                             onClick={() => navigate(-1)}
+                            style={{ marginRight: '10px' }}
                         >
                             Go back
                         </Button>
