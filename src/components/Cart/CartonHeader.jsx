@@ -21,7 +21,7 @@ const CartonHeader = () => {
                     <Badge>{lengthofcart}</Badge>
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu style={{ minWidth: 200 }}>
+                <Dropdown.Menu style={{ minWidth: 250 }}>
                     {lengthofcart > 0 ? (
                         <>
                             {cart.map(prod => (
