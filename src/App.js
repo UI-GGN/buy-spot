@@ -7,6 +7,7 @@ import { BuyerRegistration } from './components/register-form/buyer-registration
 import { BuyerLogin } from './components/login-form/buyer-login';
 import { About } from './components/About';
 import { Home } from './components/Home';
+import { Search } from './components/Search';
 import { SellerLogin } from './components/login-form/seller-login';
 import { SellerRegistration } from './components/register-form/seller-registration';
 import { Container, Nav, Navbar } from 'react-bootstrap';
@@ -43,8 +44,8 @@ function App() {
     const filterProducts = () => {
         const data = productdata.filter(
             product =>
-                product.category.includes(search) ||
-                product.title.includes(search),
+                product.category.toLowerCase().includes(search) ||
+                product.title.toLowerCase().includes(search),
         );
         setFilteredData(data);
     };
@@ -57,6 +58,10 @@ function App() {
         const searchInput = document.getElementById('searchInput').value;
         setSearch(searchInput.toLowerCase());
         filterProducts();
+    };
+
+    const onClickHome = () => {
+        document.getElementById('searchInput').setAttribute('', '');
     };
 
     const userLoggedIn = useSelector(state => {
@@ -76,6 +81,7 @@ function App() {
                             style={{ color: 'white' }}
                             as={Link}
                             to="/"
+                            onClick={onClickHome}
                         >
                             BuySpot
                         </Navbar.Brand>
@@ -85,13 +91,14 @@ function App() {
                             type="text"
                             placeholder="Search....."
                         />
-                        <button
-                            className="search-button"
-                            type="submit"
+                        <Nav.Link
+                            style={{ color: 'white' }}
+                            as={Link}
+                            to="/search"
                             onClick={setValue}
                         >
-                            Search
-                        </button>
+                            Search{' '}
+                        </Nav.Link>
                         <Navbar.Toggle
                             aria-controls="basic-navbar-nav"
                             style={{
@@ -105,6 +112,7 @@ function App() {
                                     style={{ color: 'white' }}
                                     as={Link}
                                     to="/"
+                                    onClick={onClickHome}
                                 >
                                     Home
                                 </Nav.Link>
@@ -166,15 +174,11 @@ function App() {
                         <Route path="/about" element={<About />}></Route>
                         <Route
                             path="/"
-                            element={
-                                <Home
-                                    productData={
-                                        search === ''
-                                            ? productdata
-                                            : filteredData
-                                    }
-                                />
-                            }
+                            element={<Home productData={productdata} />}
+                        ></Route>
+                        <Route
+                            path="/search"
+                            element={<Search productData={filteredData} />}
                         ></Route>
                         <Route
                             path="/buyer-registration"
@@ -194,6 +198,10 @@ function App() {
                         ></Route>
                         <Route
                             path="/product/:productId"
+                            element={<ProductDescription />}
+                        ></Route>
+                        <Route
+                            path="/search/product/:productId"
                             element={<ProductDescription />}
                         ></Route>
                     </Routes>
