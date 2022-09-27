@@ -10,7 +10,6 @@ const Product = product => {
   const showPrice = useSelector(state => {
       return state.loggedInUser
   })
-  console.log(product);
   
   return (
     <div className="col-md-4 custom-product" data-testid={'product'}>
@@ -35,7 +34,6 @@ const Product = product => {
         </Link>
     </div>
 )
-
 }
 Product.propTypes = {
   product:PropTypes.object.isRequired ,
